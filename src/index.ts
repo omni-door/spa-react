@@ -340,6 +340,7 @@ async function init ({
 
 export function newTpl ({
   ts,
+  test,
   componentName,
   stylesheet,
   newPath,
