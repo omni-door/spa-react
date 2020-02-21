@@ -348,6 +348,7 @@ export function newTpl ({
   tpls
 }: {
   ts: boolean;
+  test: boolean;
   componentName: string;
   stylesheet: STYLE;
   newPath: string;
@@ -389,7 +390,7 @@ export function newTpl ({
   const content_fc = type === 'fc' && tpl.component_functional({ ts, componentName, style: stylesheet });
   const content_readme = md === 'md' && tpl.component_readme({ componentName });
   const content_style = stylesheet && tpl.component_stylesheet({ componentName });
-  const content_test = tpl.component_test({ componentName });
+  const content_test = test && tpl.component_test({ componentName });
 
   const pathToFileContentMap = {
     [`index.${ts ? 'ts' : 'js'}`]: content_index,
