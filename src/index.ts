@@ -32,7 +32,6 @@ import {
   component_readme,
   component_stylesheet,
   component_test,
-  component_stories,
   TPLS_INITIAL,
   TPLS_INITIAL_FN,
   TPLS_INITIAL_RETURE,
@@ -73,8 +72,7 @@ const default_tpl_list = {
   component_index,
   component_readme,
   component_stylesheet,
-  component_test,
-  component_stories
+  component_test
 };
 
 export type ResultOfDependencies = string[] | { add?: string[]; remove?: string[]; };
@@ -390,7 +388,6 @@ export function newTpl ({
   const content_cc = type === 'cc' && tpl.component_class({ ts, componentName, style: stylesheet });
   const content_fc = type === 'fc' && tpl.component_functional({ ts, componentName, style: stylesheet });
   const content_readme = md === 'md' && tpl.component_readme({ componentName });
-  const content_stories = tpl.component_stories({ componentName });
   const content_style = stylesheet && tpl.component_stylesheet({ componentName });
   const content_test = tpl.component_test({ componentName });
 
@@ -404,11 +401,6 @@ export function newTpl ({
         ? 'tsx'
         : 'jsx'
     }`]: content_test,
-    [`__stories__/index.stories.${
-      ts
-        ? 'tsx'
-        : 'jsx'
-    }`]: content_stories,
     'README.md': content_readme
   }
   /**

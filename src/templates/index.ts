@@ -22,7 +22,6 @@ import component_index from './new/index';
 import component_readme from './new/readme';
 import component_stylesheet from './new/stylesheet';
 import component_test from './new/test';
-import component_stories from './new/stories';
 
 export { default as babel } from './babel';
 export { default as commitlint } from './commitlint';
@@ -48,7 +47,6 @@ export { default as component_index } from './new/index';
 export { default as component_readme } from './new/readme';
 export { default as component_stylesheet } from './new/stylesheet';
 export { default as component_test } from './new/test';
-export { default as component_stories } from './new/stories';
 
 const tpls = {
   babel,
@@ -74,8 +72,7 @@ const tpls = {
   component_index,
   component_readme,
   component_stylesheet,
-  component_test,
-  component_stories
+  component_test
 };
 
 type TPLS = {
@@ -88,8 +85,7 @@ export type TPLS_INITIAL = Omit<TPLS,
   'component_index' |
   'component_readme' |
   'component_stylesheet' |
-  'component_test' |
-  'component_stories'
+  'component_test'
 >;
 
 export type TPLS_INITIAL_FN = TPLS_INITIAL[keyof TPLS_INITIAL];
@@ -102,8 +98,7 @@ export type TPLS_NEW = Pick<TPLS,
   'component_index' |
   'component_readme' |
   'component_stylesheet' |
-  'component_test' |
-  'component_stories'
+  'component_test'
 >;
 
 export type TPLS_NEW_FN = TPLS_NEW[keyof TPLS_NEW];

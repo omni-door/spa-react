@@ -4,7 +4,6 @@ import component_class from '../class_component';
 import component_function from '../functional_component';
 import component_index from '../index';
 import component_readme from '../readme';
-import component_stories from '../stories';
 import component_stylesheet from '../stylesheet';
 import component_test from '../test';
 
@@ -29,12 +28,6 @@ describe('component_index template test', function () {
 describe('component_readme template test', function () {
   it('type checking', function () {
     expect(component_readme).to.be.a('function');
-  });
-});
-
-describe('component_stories template test', function () {
-  it('type checking', function () {
-    expect(component_stories).to.be.a('function');
   });
 });
 
