@@ -1,4 +1,4 @@
-import { STRATEGY, STYLE, PKJTOOL } from '@omni-door/tpl-utils';
+import { STRATEGY, STYLE, PKJTOOL, MARKDOWN } from '@omni-door/tpl-utils';
 import { parse } from 'path';
 import init, { newTpl } from './index';
 const args = process.argv.slice(2);
@@ -15,6 +15,7 @@ if (args.length > 0) {
       componentName: 'Omni',
       stylesheet: 'scss' as STYLE,
       newPath: process.cwd(),
+      md: 'md' as MARKDOWN,
       type: 'fc' as 'fc'
     };
     for (let i = 1; i < args.length; i++) {

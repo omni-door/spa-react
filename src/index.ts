@@ -4,7 +4,8 @@ import {
   intersection,
   PKJTOOL,
   STYLE,
-  STRATEGY
+  STRATEGY,
+  MARKDOWN
 } from '@omni-door/tpl-utils';
 import {
   babel as babelConfigJs,
@@ -344,6 +345,7 @@ export function newTpl ({
   componentName,
   stylesheet,
   newPath,
+  md,
   type,
   tpls
 }: {
@@ -351,6 +353,7 @@ export function newTpl ({
   componentName: string;
   stylesheet: STYLE;
   newPath: string;
+  md: MARKDOWN;
   type: 'fc' | 'cc';
   tpls?: (tpls: TPLS_NEW) => TPLS_NEW_RETURE;
 }) {
@@ -386,7 +389,7 @@ export function newTpl ({
   const content_index = tpl.component_index({ ts, componentName });
   const content_cc = type === 'cc' && tpl.component_class({ ts, componentName, style: stylesheet });
   const content_fc = type === 'fc' && tpl.component_functional({ ts, componentName, style: stylesheet });
-  const content_readme = tpl.component_readme({ componentName });
+  const content_readme = md === 'md' && tpl.component_readme({ componentName });
   const content_stories = tpl.component_stories({ componentName });
   const content_style = stylesheet && tpl.component_stylesheet({ componentName });
   const content_test = tpl.component_test({ componentName });
