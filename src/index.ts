@@ -191,7 +191,7 @@ async function init ({
   // ReadMe
   const content_readMe = tpl.readme({ name, configFileName });
 
-  const files = {
+  const pathToFileContentMap = {
     [`${configFileName}`]: content_omni,
     'package.json': content_pkg,
     '.gitignore': content_gitignore,
@@ -214,10 +214,10 @@ async function init ({
    * create files
    */
   const file_path = (p: string) => path.resolve(initPath, p);
-  for (const p in files) {
+  for (const p in pathToFileContentMap) {
     output_file({
       file_path: file_path(p),
-      file_content: files[p]
+      file_content: pathToFileContentMap[p]
     });
   }
 
