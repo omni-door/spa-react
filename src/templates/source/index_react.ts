@@ -1,34 +1,23 @@
-import { BUILD, DEVSERVER, PROJECT_TYPE } from '@omni-door/tpl-common';
-
 export default function (config: {
-  build: BUILD;
-  devServer: DEVSERVER;
-  project_type: PROJECT_TYPE;
   ts: boolean;
 }) {
-  const { build, devServer, project_type, ts } = config;
-  const initText = `It's Your ${ project_type === 'toolkit' ? 'Omni-Toolkit' : 'Omni'} Project`;
-  const needCoreJS = (project_type === 'spa-react' || project_type === 'component-library-react') && (build === 'webpack' || build === 'rollup');
+  const { ts } = config;
 
-  return `${ts ? '///<reference types=\'webpack-env\' />\n' : ''}${needCoreJS ? `
+  return `${ts ? '///<reference types=\'webpack-env\' />' : ''}
 import 'core-js/stable';
-import 'regenerator-runtime/runtime';
-` : ''}
+import 'regenerator-runtime/runtime'
 import React from 'react';
 import { render } from 'react-dom';
 
 const App = () => (
   <div className='main'>
-    ${initText}
+    It's Your Omni-SPA Project
   </div>
 );
 
 render(<App />, document.getElementById('root'));
-${
-  devServer === 'basic'
-    ? `if (module.hot) {
+
+if (module.hot) {
   module.hot.accept();
-}`
-    : ''
 }`;
 }

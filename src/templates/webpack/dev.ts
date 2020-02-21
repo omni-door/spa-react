@@ -1,4 +1,4 @@
-import { PROJECT_TYPE, STYLE } from '@omni-door/tpl-common';
+import { PROJECT_TYPE, STYLE } from '@omni-door/tpl-utils';
 
 export default function (config: {
   project_type: PROJECT_TYPE;

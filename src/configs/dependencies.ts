@@ -1,4 +1,4 @@
-import { getDependency, arr2str, STYLE, DEVSERVER, STRATEGY } from '@omni-door/tpl-common';
+import { getDependency, arr2str, STYLE, STRATEGY } from '@omni-door/tpl-utils';
 import { dependencies as dependenciesMap, devDependencies as devDependenciesMap } from './dependencies_stable_map';
 
 interface Config {
@@ -8,7 +8,6 @@ interface Config {
   commitlint: boolean;
   style: STYLE;
   stylelint: boolean;
-  devServer: DEVSERVER;
 }
 
 export function dependencies (strategy: STRATEGY) {
