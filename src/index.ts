@@ -35,9 +35,6 @@ import {
   logErr,
   logWarn,
   output_file,
-  logPrefix as getLogPrefix,
-  getLogo,
-  getBrand,
   logSuc
 } from '@omni-door/tpl-utils';
 
@@ -100,8 +97,11 @@ async function init ({
   isSlient,
   dependencies: dependencies_custom,
   devDependencies: devDependencies_custom,
-  error = () => process.exit(1),
-  success = () => logSuc('单页应用初始化完成！(The single-page-application initial has been completed!)')
+  error = () => {
+    logErr('单页应用项目初始化失败！(The single-page-application project initialization has been occured some error!)');
+    process.exit(1);
+  },
+  success = () => logSuc('单页应用项目初始化完成！(The single-page-application project initialization has been completed!)')
 }: InitOptions) {
   // reset illegal strategy
   let custom_tpl_list = {};
