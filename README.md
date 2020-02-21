@@ -59,4 +59,4 @@ The React single-page-application project template
 
 - source_html from => src/index.html
 
-- source_d from => src/@types/global.d.ts
+- source_d => src/@types/global.d.ts
