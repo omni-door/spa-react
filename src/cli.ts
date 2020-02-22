@@ -4,7 +4,7 @@ import init, { newTpl } from './index';
 const args = process.argv.slice(2);
 
 type Option = {
-  [key: string]: string | boolean;
+  [key: string]: string | boolean | Function;
 };
 
 if (args.length > 0) {
@@ -19,9 +19,14 @@ if (args.length > 0) {
       md: 'md' as MARKDOWN,
       type: 'fc' as 'fc'
     };
+    const fnArr = ['tpls', 'dependencies', 'devDependencies', 'error', 'success'];
     for (let i = 1; i < args.length; i++) {
       const item = args[i];
       const [ k, val ] = item.split('=');
+      if (~fnArr.indexOf(k) && typeof val === 'string') {
+        (options as Option)[k] = new Function(`return ${val}`)();
+        continue;
+      }
       (options as Option)[k] = val === 'true'
         ? true
         : val === 'false'
