@@ -134,10 +134,10 @@
   resolved "https://registry.yarnpkg.com/@istanbuljs/schema/-/schema-0.1.2.tgz#26520bf09abe4a5644cd5414e37125a8954241dd"
   integrity sha512-tsAQNx32a8CoFhjhijUIhI4kccIAgmGhy8LZMZgGfmXcpMbPRUqn5LWmgRttILi6yeGmBJd2xsPkFMs0PzgPCw==
 
-"@omni-door/tpl-utils@^0.0.9":
-  version "0.0.9"
-  resolved "https://registry.yarnpkg.com/@omni-door/tpl-utils/-/tpl-utils-0.0.9.tgz#d4f4896bfdf6647ea09dc3394b2781660e82f4d1"
-  integrity sha512-uGdBp62KBAb3yV2OM6tKW+YEpgUNbwV9twwLF58qugpaR5DvdpMRj3hVSb4Q+p64d1/cckK6XGar7bVxQapnxQ==
+"@omni-door/tpl-utils@^0.0.11":
+  version "0.0.11"
+  resolved "https://registry.yarnpkg.com/@omni-door/tpl-utils/-/tpl-utils-0.0.11.tgz#67bea527e6d79f5ea26669a9dc3b842fc9c86ebc"
+  integrity sha512-EQhcGoLrRixTEV7eQ1A6C4SlBxQlUJMD840SHjQYqvFD99jv0WgwK8WCPw8zaAXMZMTzaE3i44cC1F+e4eiC2Q==
   dependencies:
     chalk "^3.0.0"
     fs-extra "^8.1.0"

@@ -1,13 +1,17 @@
 import path from 'path';
 import {
-  spinner,
   arr2str,
   intersection,
   PKJTOOL,
   STYLE,
   STRATEGY,
   MARKDOWN,
-  logInfo
+  logInfo,
+  logWarn,
+  logErr,
+  logSuc,
+  exec,
+  output_file
 } from '@omni-door/tpl-utils';
 import {
   babel as babelConfigJs,
@@ -43,9 +47,7 @@ import {
 } from './templates';
 import { dependencies, devDependencies } from './configs/dependencies';
 import {
-  exec,
-  logWarn,
-  output_file
+  
 } from '@omni-door/tpl-utils';
 
 const default_tpl_list = {
@@ -114,16 +116,12 @@ async function init ({
   dependencies: dependencies_custom,
   devDependencies: devDependencies_custom,
   error = () => {
-    spinner.state('fail', '单页应用项目初始化失败！(The single-page-application project initialization has been occured some error!)');
+    logErr('单页应用项目初始化失败！(The single-page-application project initialization has been occured some error!)');
     process.exit(1);
   },
-  success = () => spinner.state('succeed', '单页应用项目初始化完成！(The single-page-application project initialization has been completed!)')
+  success = () => logSuc('单页应用项目初始化完成！(The single-page-application project initialization has been completed!)')
 }: InitOptions) {
-  spinner.color('green');
-  spinner.prefix('noise');
-
   // 模板解析
-  spinner.state('start', '模板解析中 (Parsing templates, please wait patiently)');
   let custom_tpl_list = {};
   try {
     custom_tpl_list = typeof tpls === 'function'
@@ -155,79 +153,28 @@ async function init ({
   const project_type = 'spa-react';
 
   // 生成项目文件
-  spinner.text('项目文件生成中 (Generating files, please wait patiently)');
-  // default files
-  const content_omni = tpl.omni({
-    project_type,
-    ts,
-    test,
-    eslint,
-    commitlint,
-    style,
-    stylelint
-  });
-  const content_pkg = tpl.pkj({
-    project_type,
-    name,
-    ts,
-    test,
-    eslint,
-    commitlint,
-    stylelint,
-    strategy
-  });
-  const content_gitignore = tpl.gitignore();
-  const content_indexReactTpl = tpl.source_index_react({ ts });
-  const content_indexHtml = tpl.source_html({ name });
-
-  // tsconfig
-  const content_ts = ts && tpl.tsconfig();
-
-  // d.ts files
-  const content_d = ts && tpl.source_d({ style });
-
-  // test files
-  const content_jest = test && tpl.jest({ ts });
-
-  // lint files
-  const content_eslintrc = eslint && tpl.eslint({ ts });
-  const content_eslintignore = eslint && tpl.eslintignore();
-  const content_stylelint = stylelint && tpl.stylelint({ style });
-  const content_commitlint = commitlint && tpl.commitlint({ name });
-
-  // build files
-  const content_babel = tpl.babel({ ts });
-
-  // webpack config files
-  const content_webpack_common = tpl.webpack_config_common({ ts, style, configFileName });
-  const content_webpack_dev = tpl.webpack_config_dev({ project_type, name, style, ts });
-  const content_webpack_prod = tpl.webpack_config_prod({ style, configFileName });
-
-  // ReadMe
-  const content_readMe = tpl.readme({ name, configFileName });
-
   const pathToFileContentMap = {
-    [`${configFileName}`]: content_omni,
-    'package.json': content_pkg,
-    '.gitignore': content_gitignore,
-    [`src/index.${ts ? 'tsx' : 'jsx'}`]: content_indexReactTpl,
-    'src/index.html': content_indexHtml,
-    'src/@types/global.d.ts': content_d,
-    'configs/webpack.config.common.js': content_webpack_common,
-    'configs/webpack.config.dev.js': content_webpack_dev,
-    'configs/webpack.config.prod.js': content_webpack_prod,
-    'tsconfig.json': content_ts,
-    'jest.config.js': content_jest,
-    '.eslintrc.js': content_eslintrc,
-    '.eslintignore': content_eslintignore,
-    'stylelint.config.js': content_stylelint,
-    'commitlint.config.js': content_commitlint,
-    'babel.config.js': content_babel,
-    'README.md': content_readMe
+    // default files
+    [`${configFileName}`]: tpl.omni({ project_type, ts, test, eslint, commitlint, style, stylelint }),
+    'package.json': tpl.pkj({ project_type, name, ts, test, eslint, commitlint, stylelint, strategy }),
+    '.gitignore': tpl.gitignore(),
+    [`src/index.${ts ? 'tsx' : 'jsx'}`]: tpl.source_index_react({ ts }),
+    'src/index.html': tpl.source_html({ name }),
+    'src/@types/global.d.ts': ts && tpl.source_d({ style }), // d.ts files
+    // webpack config files
+    'configs/webpack.config.common.js': tpl.webpack_config_common({ ts, style, configFileName }),
+    'configs/webpack.config.dev.js': tpl.webpack_config_dev({ project_type, name, style, ts }),
+    'configs/webpack.config.prod.js': tpl.webpack_config_prod({ style, configFileName }),
+    'tsconfig.json': ts && tpl.tsconfig(), // tsconfig
+    'jest.config.js': test && tpl.jest({ ts }), // test files
+    // lint files
+    '.eslintrc.js': eslint && tpl.eslint({ ts }),
+    '.eslintignore': eslint && tpl.eslintignore(),
+    'stylelint.config.js': stylelint && tpl.stylelint({ style }),
+    'commitlint.config.js': commitlint && tpl.commitlint({ name }),
+    'babel.config.js': tpl.babel({ ts }), // build files
+    'README.md': tpl.readme({ name, configFileName }) // ReadMe
   }
-  /**
-   * create files
-   */
   const file_path = (p: string) => path.resolve(initPath, p);
   for (const p in pathToFileContentMap) {
     output_file({
@@ -237,7 +184,6 @@ async function init ({
   }
 
   // 项目依赖解析
-  spinner.text('项目依赖解析中 (Parsing dependencies, please wait patiently)');
   let installCliPrefix = pkgtool === 'yarn' ? `${pkgtool} add --cwd ${initPath}` : `${pkgtool} install --save --prefix ${initPath}`;
   let installDevCliPrefix = pkgtool === 'yarn' ? `${pkgtool} add -D --cwd ${initPath}` : `${pkgtool} install --save-dev --prefix ${initPath}`;
   if (pkgtool === 'cnpm' && initPath !== process.cwd()) {
@@ -332,9 +278,6 @@ async function init ({
   const installServerDevCli = devServerDepStr ? `${installDevCliPrefix} ${devServerDepStr}` : '';
   const installCustomDevCli = customDepStr ? `${installDevCliPrefix} ${customDepStr}` : '';
 
-  // 项目依赖安装
-  spinner.prefix('arrow3');
-  spinner.text('项目依赖安装中 (Installing dependencies, please wait patiently)');
   exec([
     installCli,
     installDevCli,
