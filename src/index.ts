@@ -46,9 +46,7 @@ import {
   TPLS_NEW_RETURE
 } from './templates';
 import { dependencies, devDependencies } from './configs/dependencies';
-import {
-  
-} from '@omni-door/tpl-utils';
+import { devDependencies as devDependencyMap } from './configs/dependencies_stable_map';
 
 const default_tpl_list = {
   babel: babelConfigJs,
@@ -156,7 +154,7 @@ async function init ({
   const pathToFileContentMap = {
     // default files
     [`${configFileName}`]: tpl.omni({ project_type, ts, test, eslint, commitlint, style, stylelint }),
-    'package.json': tpl.pkj({ project_type, name, ts, test, eslint, commitlint, stylelint, strategy }),
+    'package.json': tpl.pkj({ type_react: devDependencyMap['@types/react'], project_type, name, ts, test, eslint, commitlint, stylelint, strategy }),
     '.gitignore': tpl.gitignore(),
     [`src/index.${ts ? 'tsx' : 'jsx'}`]: tpl.source_index_react({ ts }),
     'src/index.html': tpl.source_html({ name }),
