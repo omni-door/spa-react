@@ -114,10 +114,10 @@ async function init ({
   dependencies: dependencies_custom,
   devDependencies: devDependencies_custom,
   error = () => {
-    logErr('单页应用项目初始化失败！(The single-page-application project initialization has been occured some error!)');
+    logErr('单页应用项目安装失败！(The single-page-application project installation has been occured some error!)');
     process.exit(1);
   },
-  success = () => logSuc('单页应用项目初始化完成！(The single-page-application project initialization has been completed!)')
+  success = () => logSuc('单页应用项目安装完成！(The single-page-application project installation has been completed!)')
 }: InitOptions) {
   // 模板解析
   let custom_tpl_list = {};
