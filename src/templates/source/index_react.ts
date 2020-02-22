@@ -5,7 +5,7 @@ export default function (config: {
 
   return `${ts ? '///<reference types=\'webpack-env\' />' : ''}
 import 'core-js/stable';
-import 'regenerator-runtime/runtime'
+import 'regenerator-runtime/runtime';
 import React from 'react';
 import { render } from 'react-dom';
 
