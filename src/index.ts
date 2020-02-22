@@ -1,11 +1,13 @@
 import path from 'path';
 import {
+  spinner,
   arr2str,
   intersection,
   PKJTOOL,
   STYLE,
   STRATEGY,
-  MARKDOWN
+  MARKDOWN,
+  logInfo
 } from '@omni-door/tpl-utils';
 import {
   babel as babelConfigJs,
@@ -42,10 +44,8 @@ import {
 import { dependencies, devDependencies } from './configs/dependencies';
 import {
   exec,
-  logErr,
   logWarn,
-  output_file,
-  logSuc
+  output_file
 } from '@omni-door/tpl-utils';
 
 const default_tpl_list = {
@@ -114,12 +114,16 @@ async function init ({
   dependencies: dependencies_custom,
   devDependencies: devDependencies_custom,
   error = () => {
-    logErr('单页应用项目初始化失败！(The single-page-application project initialization has been occured some error!)');
+    spinner.state('fail', '单页应用项目初始化失败！(The single-page-application project initialization has been occured some error!)');
     process.exit(1);
   },
-  success = () => logSuc('单页应用项目初始化完成！(The single-page-application project initialization has been completed!)')
+  success = () => spinner.state('succeed', '单页应用项目初始化完成！(The single-page-application project initialization has been completed!)')
 }: InitOptions) {
-  // reset illegal strategy
+  spinner.color('green');
+  spinner.prefix('noise');
+
+  // 模板解析
+  spinner.state('start', '模板解析中 (Parsing templates, please wait patiently)');
   let custom_tpl_list = {};
   try {
     custom_tpl_list = typeof tpls === 'function'
@@ -150,6 +154,8 @@ async function init ({
   const tpl = { ...default_tpl_list, ...custom_tpl_list };
   const project_type = 'spa-react';
 
+  // 生成项目文件
+  spinner.text('项目文件生成中 (Generating files, please wait patiently)');
   // default files
   const content_omni = tpl.omni({
     project_type,
@@ -230,6 +236,8 @@ async function init ({
     });
   }
 
+  // 项目依赖解析
+  spinner.text('项目依赖解析中 (Parsing dependencies, please wait patiently)');
   let installCliPrefix = pkgtool === 'yarn' ? `${pkgtool} add --cwd ${initPath}` : `${pkgtool} install --save --prefix ${initPath}`;
   let installDevCliPrefix = pkgtool === 'yarn' ? `${pkgtool} add -D --cwd ${initPath}` : `${pkgtool} install --save-dev --prefix ${initPath}`;
   if (pkgtool === 'cnpm' && initPath !== process.cwd()) {
@@ -324,6 +332,9 @@ async function init ({
   const installServerDevCli = devServerDepStr ? `${installDevCliPrefix} ${devServerDepStr}` : '';
   const installCustomDevCli = customDepStr ? `${installDevCliPrefix} ${customDepStr}` : '';
 
+  // 项目依赖安装
+  spinner.prefix('arrow3');
+  spinner.text('项目依赖安装中 (Installing dependencies, please wait patiently)');
   exec([
     installCli,
     installDevCli,
@@ -357,6 +368,7 @@ export function newTpl ({
   type: 'fc' | 'cc';
   tpls?: (tpls: TPLS_NEW) => TPLS_NEW_RETURE;
 }) {
+  logInfo(`开始创建 ${componentName} ${type === 'cc' ? '类' : '函数'}组件 (Start create ${componentName} ${type === 'cc' ? 'class' : 'functional'} component)`);
   let custom_tpl_list = {};
   try {
     custom_tpl_list = typeof tpls === 'function'
@@ -394,17 +406,17 @@ export function newTpl ({
   const content_test = test && tpl.component_test({ componentName });
 
   const pathToFileContentMap = {
-    [`index.${ts ? 'ts' : 'js'}`]: content_index,
-    [`${componentName}.${ts ? 'tsx' : 'jsx'}`]: content_cc,
-    [`${componentName}.${ts ? 'tsx' : 'jsx'}`]: content_fc,
+    [`${componentName}.${ts ? 'tsx' : 'jsx'}`]: content_fc || content_cc,
     [`style/${componentName}.${stylesheet}`]: content_style,
     [`__test__/index.test.${
       ts
         ? 'tsx'
         : 'jsx'
     }`]: content_test,
+    [`index.${ts ? 'ts' : 'js'}`]: content_index,
     'README.md': content_readme
   }
+
   /**
    * create files
    */

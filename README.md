@@ -37,17 +37,17 @@ The React single-page-application project template
 
 - tsconfig => tsconfig.json
 
-- component_class => component/{component}/index.(jsx|tsx)
+- component_class => component/{componentName}/index.(jsx|tsx)
 
-- component_functional => component/{component}/index.(jsx|tsx)
+- component_functional => component/{componentName}/index.(jsx|tsx)
 
-- component_index => component/{component}/index.(js|ts)
+- component_index => component/{componentName}/index.(js|ts)
 
-- component_readme => component/{component}/README.md
+- component_readme => component/{componentName}/README.md
 
-- component_stylesheet => component/{component}/style/index.(css|less|scss)
+- component_stylesheet => component/{componentName}/style/index.(css|less|scss)
 
-- component_test => component/{component}/test/index.(jsx|tsx)
+- component_test => component/{componentName}/test/index.(jsx|tsx)
 
 - webpack_common => configs/webpack.config.common.js
 
