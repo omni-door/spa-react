@@ -55,7 +55,7 @@ module.exports = {
     configuration: config => merge(config, require(path.resolve('configs/webpack.config.prod.js'))),
 
     reserve: {
-      style: ${style ? true : false}, // 构建结果是否保留样式文件 (whether or not reserve the stylesheet files)
+      style: false, // 构建结果是否保留样式文件 (whether or not reserve the stylesheet files)
       assets: [] // 构建结果保留其他资源的路径 (reserve other asset paths)
     },
 
