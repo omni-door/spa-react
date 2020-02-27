@@ -10,6 +10,7 @@ import {
   logWarn,
   logErr,
   logSuc,
+  logTime,
   exec,
   output_file,
 } from '@omni-door/tpl-utils';
@@ -95,8 +96,8 @@ export type InitOptions = {
   tpls?: (tpls: TPLS_INITIAL) => TPLS_INITIAL_RETURE;
   dependencies?: (dependecies_default: string[]) => ResultOfDependencies;
   devDependencies?: (devDependecies_default: string[]) => ResultOfDependencies;
-  error?: () => any;
-  success?: () => any;
+  error?: (err: any) => any;
+  success?: (results: any[]) => any;
 };
 
 async function init ({
@@ -122,6 +123,7 @@ async function init ({
   success = () => logSuc('单页应用项目安装完成！(The single-page-application project installation has been completed!)')
 }: InitOptions) {
   // 模板解析
+  logTime('模板解析');
   let custom_tpl_list = {};
   try {
     custom_tpl_list = typeof tpls === 'function'
@@ -151,8 +153,10 @@ async function init ({
   }
   const tpl = { ...default_tpl_list, ...custom_tpl_list };
   const project_type = 'spa-react';
+  logTime('模板解析', true);
 
   // 生成项目文件
+  logTime('生成文件');
   const pathToFileContentMap = {
     // default files
     [`${configFileName}`]: tpl.omni({ project_type, ts, test, eslint, commitlint, style, stylelint }),
@@ -182,8 +186,10 @@ async function init ({
       file_content: pathToFileContentMap[p]
     });
   }
+  logTime('生成文件', true);
 
   // 项目依赖解析
+  logTime('依赖解析');
   let installCliPrefix = pkgtool === 'yarn' ? `${pkgtool} add --cwd ${initPath}` : `${pkgtool} install --save --prefix ${initPath}`;
   let installDevCliPrefix = pkgtool === 'yarn' ? `${pkgtool} add -D --cwd ${initPath}` : `${pkgtool} install --save-dev --prefix ${initPath}`;
   if (pkgtool === 'cnpm' && initPath !== process.cwd()) {
@@ -277,7 +283,10 @@ async function init ({
   const installStylelintDevCli = stylelintDepStr ? `${installDevCliPrefix} ${stylelintDepStr}` : '';
   const installServerDevCli = devServerDepStr ? `${installDevCliPrefix} ${devServerDepStr}` : '';
   const installCustomDevCli = customDepStr ? `${installDevCliPrefix} ${customDepStr}` : '';
+  logTime('依赖解析', true);
 
+  // 项目依赖安装
+  logTime('安装依赖');
   exec([
     installCli,
     installDevCli,
@@ -289,7 +298,10 @@ async function init ({
     installStylelintDevCli,
     installServerDevCli,
     installCustomDevCli
-  ], success, error, isSlient);
+  ], res => {
+    logTime('安装依赖', true);
+    success(res);
+  }, error, isSlient);
 }
 
 export function newTpl ({
@@ -311,6 +323,7 @@ export function newTpl ({
   type: 'fc' | 'cc';
   tpls?: (tpls: TPLS_NEW) => TPLS_NEW_RETURE;
 }) {
+  logTime('创建组件');
   logInfo(`开始创建 ${componentName} ${type === 'cc' ? '类' : '函数'}组件 (Start create ${componentName} ${type === 'cc' ? 'class' : 'functional'} component)`);
   let custom_tpl_list = {};
   try {
@@ -370,6 +383,7 @@ export function newTpl ({
       file_content: pathToFileContentMap[p]
     });
   }
+  logTime('创建组件', true);
 }
 
 export default init;
