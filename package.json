@@ -1,6 +1,6 @@
 {
   "name": "@omni-door/tpl-spa-react",
-  "version": "0.0.25",
+  "version": "0.0.26",
   "description": "The React single-page-application project template",
   "bin": {
     "omni-spa-react": "./bin/omni-door-spa-react.js"
@@ -34,7 +34,7 @@
   },
   "homepage": "https://github.com/omni-door/tpl-spa-react#readme",
   "dependencies": {
-    "@omni-door/tpl-utils": "^0.0.16"
+    "@omni-door/tpl-utils": "^0.0.17"
   },
   "devDependencies": {
     "@types/chai": "^4.2.9",
