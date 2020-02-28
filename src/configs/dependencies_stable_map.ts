@@ -1,8 +1,8 @@
 export const dependencies = {
-  'core-js': '3.6.4',
-  'react': '16.12.0',
-  'react-dom': '16.12.0',
-  'regenerator-runtime': '0.13.3'
+  'core-js': '^3.6.4',
+  'react': '^16.12.0',
+  'react-dom': '^16.12.0',
+  'regenerator-runtime': '^0.13.3'
 };
 
 export const devDependencies = {
