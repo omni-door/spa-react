@@ -33,7 +33,7 @@ module.exports = merge(commonConfig, {
       },
       ` : style === 'less' ? `{
         test: /\\.(css|less)$/,
-        use: [MiniCssExtractPlugin.loader, 'css-loader', 'less-loader']
+        use: [MiniCssExtractPlugin.loader, 'css-loader', { loader: 'less-loader', options: { javascriptEnabled: true } }]
       },` : style === 'scss' ? `{
         test: /\\.(css|scss|sass)$/,
         use: [MiniCssExtractPlugin.loader, 'css-loader', 'sass-loader']
@@ -42,7 +42,7 @@ module.exports = merge(commonConfig, {
         use:  [MiniCssExtractPlugin.loader, 'css-loader']
       },{
         test: /\\.less$/,
-        use: [MiniCssExtractPlugin.loader, 'css-loader', 'less-loader']
+        use: [MiniCssExtractPlugin.loader, 'css-loader', { loader: 'less-loader', options: { javascriptEnabled: true } }]
       },
       {
         test: /\.(scss|sass)$/,

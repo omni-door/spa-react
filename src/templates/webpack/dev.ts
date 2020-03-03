@@ -35,7 +35,7 @@ module.exports = merge(commonConfig, {
       }
       ` : style === 'less' ? `{
         test: /\\.(css|less)$/,
-        use: ['style-loader', 'css-loader', 'less-loader']
+        use: ['style-loader', 'css-loader', { loader: 'less-loader', options: { javascriptEnabled: true } }]
       },` : style === 'scss' ? `{
         test: /\\.(css|scss|sass)$/,
         use: ['style-loader', 'css-loader', 'sass-loader']
@@ -44,7 +44,7 @@ module.exports = merge(commonConfig, {
         use:  ['style-loader', 'css-loader']
       },{
         test: /\\.less$/,
-        use: ['style-loader', 'css-loader', 'less-loader']
+        use: ['style-loader', 'css-loader', { loader: 'less-loader', options: { javascriptEnabled: true } }]
       },
       {
         test: /\.(scss|sass)$/,
