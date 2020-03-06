@@ -66,5 +66,6 @@ export const devDependencies = {
   'webpack-hot-middleware': '2.25.0',
   'webpack-merge': '4.2.2',
   'webpackbar': '4.0.0',
+  'hard-source-webpack-plugin': '0.13.1',
   '@omni-door/cli': 'latest'
 };

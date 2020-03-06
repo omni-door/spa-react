@@ -62,7 +62,8 @@ export function devDependencies (strategy: STRATEGY, config: Config) {
     dependency('mini-css-extract-plugin'),
     dependency('cssnano'),
     dependency('webpackbar'),
-    dependency('webpack-bundle-analyzer')
+    dependency('webpack-bundle-analyzer'),
+    dependency('hard-source-webpack-plugin')
   ];
 
   const buildDependencies = [
