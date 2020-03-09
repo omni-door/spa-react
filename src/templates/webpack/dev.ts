@@ -15,6 +15,7 @@ const path = require('path');
 const webpack = require('webpack');
 const merge = require('webpack-merge');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
+const HardSourceWebpackPlugin = require('hard-source-webpack-plugin');
 const commonConfig = require('./webpack.config.common.js');
 
 module.exports = merge(commonConfig, {
@@ -59,7 +60,17 @@ module.exports = merge(commonConfig, {
       template: path.join(__dirname, ${isReactSPAProject ? '\'../src/index.html\'' : '\'../demo/index.html\''}),
       filename: 'index.html'
     }),
-    new webpack.HotModuleReplacementPlugin()
+    new webpack.HotModuleReplacementPlugin(),
+    new HardSourceWebpackPlugin({
+      info: {
+        mode: 'none',
+        level: 'warn'
+      },
+      cachePrune: {
+        maxAge: 7 * 24 * 60 * 60 * 1000, // 7 days
+        sizeThreshold: 100 * 1024 * 1024 // 100 MB
+      }
+    })
   ]
 });`;
 }
