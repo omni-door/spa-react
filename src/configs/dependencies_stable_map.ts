@@ -17,6 +17,7 @@ export const devDependencies = {
   '@types/react': '16.9.19',
   '@types/react-dom': '16.9.5',
   '@types/webpack-env': '1.15.1',
+  '@types/vfile-message': '1.0.1',
   '@typescript-eslint/eslint-plugin': '2.19.2',
   '@typescript-eslint/parser': '2.19.2',
   'babel-loader': '8.0.6',
@@ -67,5 +68,6 @@ export const devDependencies = {
   'webpack-merge': '4.2.2',
   'webpackbar': '4.0.0',
   'hard-source-webpack-plugin': '0.13.1',
+  'fork-ts-checker-webpack-plugin': '4.0.5',
   '@omni-door/cli': 'latest'
 };

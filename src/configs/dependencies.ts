@@ -63,7 +63,8 @@ export function devDependencies (strategy: STRATEGY, config: Config) {
     dependency('cssnano'),
     dependency('webpackbar'),
     dependency('webpack-bundle-analyzer'),
-    dependency('hard-source-webpack-plugin')
+    dependency('hard-source-webpack-plugin'),
+    ts ? dependency('fork-ts-checker-webpack-plugin') : ''
   ];
 
   const buildDependencies = [
@@ -121,6 +122,7 @@ export function devDependencies (strategy: STRATEGY, config: Config) {
     dependency('stylelint-config-prettier'),
     dependency('stylelint-order'),
     dependency('stylelint-declaration-block-no-ignored-properties'),
+    ts ? dependency('@types/vfile-message') : '', // stylelint -> postcss-markdown -> remark -> unified -> @types/vfile(3.0.0) -> @types/vfile-message(*)
     style === 'all' || style === 'scss' ? dependency('stylelint-scss') : ''
   ] : [];
 

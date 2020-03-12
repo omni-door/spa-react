@@ -16,10 +16,15 @@ const webpack = require('webpack');
 const merge = require('webpack-merge');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const HardSourceWebpackPlugin = require('hard-source-webpack-plugin');
+const ForkTsCheckerWebpackPlugin = require('fork-ts-checker-webpack-plugin');
 const commonConfig = require('./webpack.config.common.js');
 
 module.exports = merge(commonConfig, {
   mode: 'development',
+  devtool: 'cheap-module-eval-source-map',
+  optimization: {
+    minimize: false,
+  },
   entry: [
     'webpack-hot-middleware/client?path=/__webpack_hmr&timeout=20000',
     path.join(__dirname, ${isReactSPAProject ? `'../src/index.${ts ? 'tsx' : 'jsx'}'` : `'../demo/index.${ts ? 'tsx' : 'jsx'}'`})
@@ -61,6 +66,7 @@ module.exports = merge(commonConfig, {
       filename: 'index.html'
     }),
     new webpack.HotModuleReplacementPlugin(),
+    new ForkTsCheckerWebpackPlugin(),
     new HardSourceWebpackPlugin({
       info: {
         mode: 'none',
