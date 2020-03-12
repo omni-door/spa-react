@@ -16,7 +16,7 @@ const webpack = require('webpack');
 const merge = require('webpack-merge');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const HardSourceWebpackPlugin = require('hard-source-webpack-plugin');
-const ForkTsCheckerWebpackPlugin = require('fork-ts-checker-webpack-plugin');
+${ts ? "const ForkTsCheckerWebpackPlugin = require('fork-ts-checker-webpack-plugin');" : ''}
 const commonConfig = require('./webpack.config.common.js');
 
 module.exports = merge(commonConfig, {
@@ -66,7 +66,7 @@ module.exports = merge(commonConfig, {
       filename: 'index.html'
     }),
     new webpack.HotModuleReplacementPlugin(),
-    new ForkTsCheckerWebpackPlugin(),
+    ${ts ? "new ForkTsCheckerWebpackPlugin()," : ''}
     new HardSourceWebpackPlugin({
       info: {
         mode: 'none',
