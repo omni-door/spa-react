@@ -47,7 +47,7 @@ module.exports = {
     // 务必使用绝对路径 (must be a absolute path)
     outDir: path.resolve('dist'),
 
-    // 构建的资源是否加上hash (whether the hash tag add to building result)
+    // 构建的资源是否加上hash，可选 'hash'、'contenthash'、'chunkhash' (whether the hash tag add to building result)
     hash: true,
 
     // 构建阶段的自定义配置回调 (The callback will be call in the build-process)

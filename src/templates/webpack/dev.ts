@@ -70,10 +70,10 @@ module.exports = merge(commonConfig, {
     new HardSourceWebpackPlugin({
       info: {
         mode: 'none',
-        level: 'error'
+        level: 'slient'
       },
       cachePrune: {
-        maxAge: 7 * 24 * 60 * 60 * 1000, // 7 days
+        maxAge: 1 * 24 * 60 * 60 * 1000, // 1 days
         sizeThreshold: 100 * 1024 * 1024 // 100 MB
       }
     })
