@@ -104,7 +104,7 @@ module.exports = merge(commonConfig, {
   },
   plugins: [
     new MiniCssExtractPlugin({
-      filename: hash ? '[name].[hash:8].css' : '[name].css',
+      filename: hash ? \`[name].[\${typeof hash === 'string' ? hash : 'contenthash':8].css\` : '[name].css',
       chunkFilename: '[id].css'
     }),
     new BundleAnalyzerPlugin({
@@ -119,7 +119,7 @@ module.exports = merge(commonConfig, {
         removeComments: true,
         collapseWhitespace: true
       },
-      filename: hash ? 'index.[hash:8].html' : 'index.html'
+      filename: hash ? \`index.[\${typeof hash === 'string' ? hash : 'contenthash':8].html\` : 'index.html'
     })
   ],
   mode: 'production'

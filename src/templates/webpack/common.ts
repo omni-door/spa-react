@@ -42,7 +42,7 @@ module.exports = {
             loader: 'url-loader',
             options: {
               limit: 8192,
-              name: hash ? 'assets/[name].[hash:8].[ext]' : 'assets/[name].[ext]'
+              name: hash ? \`assets/[name].[\${typeof hash === 'string' ? hash : 'contenthash'}:8].[ext]\` : 'assets/[name].[ext]'
             }
           }
         ]
