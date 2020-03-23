@@ -1,6 +1,6 @@
 {
   "name": "@omni-door/tpl-spa-react",
-  "version": "0.0.39",
+  "version": "0.0.40",
   "description": "The React single-page-application project template",
   "bin": {
     "omni-spa-react": "./bin/omni-door-spa-react.js"
