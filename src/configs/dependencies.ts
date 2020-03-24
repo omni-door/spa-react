@@ -95,7 +95,6 @@ export function devDependencies (strategy: STRATEGY, config: Config) {
     dependency('@types/react-dom'),
     dependency('typescript'),
     dependency('ts-node'),
-    dependency('ts-loader'),
     dependency('@types/webpack-env'),
     ...testTypesDependencies
   ] : [];

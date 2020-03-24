@@ -20,21 +20,13 @@ module.exports = {
   module: {
     rules: [
       {
-        test: /\\.(js|jsx)$/,
+        test: ${ts ? /\\.(js|jsx|ts|tsx)$/ : /\\.(js|jsx)$/},
         use: [
           {
             loader: 'babel-loader'
           }
         ]
       },
-      ${ts ? `{
-        test: /\\.(ts|tsx)$/,
-        use: [
-          {
-            loader: 'ts-loader'
-          }
-        ]
-      },` : ''}
       {
         test: /\\.(woff|woff2|eot|ttf|svg|jpg|png|gif)$/,
         use: [

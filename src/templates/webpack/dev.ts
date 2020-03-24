@@ -68,6 +68,11 @@ module.exports = merge(commonConfig, {
     new webpack.HotModuleReplacementPlugin(),
     ${ts ? "new ForkTsCheckerWebpackPlugin()," : ''}
     new HardSourceWebpackPlugin({
+      environmentHash: {
+        root: process.cwd(),
+        directories: [],
+        files: ['package-lock.json', 'yarn.lock', 'omni.config.js', 'babel.config.js', 'configs/*'],
+      },
       info: {
         mode: 'none',
         level: 'slient'
