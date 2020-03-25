@@ -24,6 +24,7 @@ import {
   npmignore,
   omni,
   pkj,
+  prettier,
   readme,
   stylelint,
   tsconfig,
@@ -61,6 +62,7 @@ const default_tpl_list = {
   npmignore,
   omni,
   pkj,
+  prettier,
   readme,
   stylelint,
   tsconfig,
@@ -88,6 +90,7 @@ export type InitOptions = {
   ts: boolean;
   test: boolean;
   eslint: boolean;
+  prettier: boolean;
   commitlint: boolean;
   style: STYLE;
   stylelint: boolean;
@@ -108,6 +111,7 @@ async function init ({
   ts,
   test,
   eslint,
+  prettier,
   commitlint,
   style,
   stylelint,
@@ -160,7 +164,7 @@ async function init ({
   const pathToFileContentMap = {
     // default files
     [`${configFileName}`]: tpl.omni({ project_type, ts, test, eslint, commitlint, style, stylelint }),
-    'package.json': tpl.pkj({ type_react: devDependencyMap['@types/react'], project_type, name, ts, test, eslint, commitlint, stylelint, strategy }),
+    'package.json': tpl.pkj({ type_react: devDependencyMap['@types/react'], project_type, name, ts, test, eslint, prettier, commitlint, stylelint, strategy }),
     '.gitignore': tpl.gitignore(),
     [`src/index.${ts ? 'tsx' : 'jsx'}`]: tpl.source_index_react({ ts }),
     'src/index.html': tpl.source_html({ name }),
@@ -172,8 +176,9 @@ async function init ({
     'tsconfig.json': ts && tpl.tsconfig(), // tsconfig
     'jest.config.js': test && tpl.jest({ ts }), // test files
     // lint files
-    '.eslintrc.js': eslint && tpl.eslint({ ts }),
+    '.eslintrc.js': eslint && tpl.eslint({ ts, prettier }),
     '.eslintignore': eslint && tpl.eslintignore(),
+    'prettier.config.js': prettier && tpl.prettier(),
     'stylelint.config.js': stylelint && tpl.stylelint({ style }),
     'commitlint.config.js': commitlint && tpl.commitlint({ name }),
     'babel.config.js': tpl.babel({ ts }), // build files
@@ -228,6 +233,8 @@ async function init ({
     testDepArr,
     eslintDepArr,
     eslintDepStr,
+    prettierDepArr,
+    prettierDepStr,
     commitlintDepArr,
     commitlintDepStr,
     stylelintDepArr,
@@ -238,6 +245,7 @@ async function init ({
   } = devDependencies(strategy, {
     ts,
     eslint,
+    prettier,
     commitlint,
     style,
     stylelint,
@@ -258,6 +266,7 @@ async function init ({
         tsDepArr = [ ...intersection(tsDepArr, tsDepArr.filter(v => v !== item_rm)) ];
         testDepArr = [ ...intersection(testDepArr, testDepArr.filter(v => v !== item_rm)) ];
         eslintDepArr = [ ...intersection(eslintDepArr, eslintDepArr.filter(v => v !== item_rm)) ];
+        prettierDepArr = [ ...intersection(prettierDepArr, prettierDepArr.filter(v => v !== item_rm)) ];
         commitlintDepArr = [ ...intersection(commitlintDepArr, commitlintDepArr.filter(v => v !== item_rm)) ];
         stylelintDepArr = [ ...intersection(stylelintDepArr, stylelintDepArr.filter(v => v !== item_rm)) ];
         devServerDepArr = [ ...intersection(devServerDepArr, devServerDepArr.filter(v => v !== item_rm)) ];
@@ -267,6 +276,7 @@ async function init ({
       tsDepStr = arr2str(tsDepArr);
       testDepStr = arr2str(testDepArr);
       eslintDepStr = arr2str(eslintDepArr);
+      prettierDepStr = arr2str(prettierDepArr);
       commitlintDepStr = arr2str(commitlintDepArr);
       stylelintDepStr = arr2str(stylelintDepArr);
       devServerDepStr = arr2str(devServerDepArr);
@@ -279,6 +289,7 @@ async function init ({
   const installTsDevCli = tsDepStr ? `${installDevCliPrefix} ${tsDepStr}` : '';
   const installTestDevCli = testDepStr ? `${installDevCliPrefix} ${testDepStr}` : '';
   const installEslintDevCli = eslintDepStr ? `${installDevCliPrefix} ${eslintDepStr}` : '';
+  const installPrettierDevCli = prettierDepStr ? `${installDevCliPrefix} ${prettierDepStr}` : '';
   const installCommitlintDevCli = commitlintDepStr ? `${installDevCliPrefix} ${commitlintDepStr}` : '';
   const installStylelintDevCli = stylelintDepStr ? `${installDevCliPrefix} ${stylelintDepStr}` : '';
   const installServerDevCli = devServerDepStr ? `${installDevCliPrefix} ${devServerDepStr}` : '';
@@ -294,6 +305,7 @@ async function init ({
     installTsDevCli,
     installTestDevCli,
     installEslintDevCli,
+    installPrettierDevCli,
     installCommitlintDevCli,
     installStylelintDevCli,
     installServerDevCli,
