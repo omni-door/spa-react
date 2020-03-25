@@ -65,6 +65,7 @@ module.exports = {
         "printWidth": 50,
         "tabWidth": 2,
         "singleQuote": true,
+        "jsxSingleQuote": true,
         "semi": true
       }
     ]` : ''}

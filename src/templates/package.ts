@@ -21,8 +21,8 @@ export default (config: {
   const script_stylelint_fix = stylelint && 'npm run lint:style_fix';
   const script_prettier_fix = prettier && 'npm run lint:prettier_fix';
 
-  const script_lint = `${script_prettier ? `${script_prettier} && ` : ''}${script_eslint ? `${script_eslint} && ` : ''} && ${script_stylelint ? `${script_stylelint} && ` : ''}`.trim();
-  const script_lint_fix = `${script_prettier_fix ? `${script_prettier_fix} && ` : ''}${script_eslint_fix ? `${script_eslint_fix} && ` : ''} && ${script_stylelint_fix ? `${script_stylelint_fix} && ` : ''}`.trim();
+  const script_lint = `${script_prettier ? `${script_prettier} && ` : ''}${script_eslint ? `${script_eslint} && ` : ''}${script_stylelint ? `${script_stylelint}` : ''}`.trim();
+  const script_lint_fix = `${script_prettier_fix ? `${script_prettier_fix} && ` : ''}${script_eslint_fix ? `${script_eslint_fix} && ` : ''}${script_stylelint_fix ? `${script_stylelint_fix}` : ''}`.trim();
 
   const lowerName = name.toLowerCase();
   return `{
@@ -47,7 +47,7 @@ export default (config: {
           ${prettier ? `"lint:prettier": "prettier --check src/",
           "lint:prettier_fix": "prettier --write src/",` : ''}
           ${stylelint ? `"lint:style": "stylelint src/**/*.{css,less,scss,sass} --allow-empty-input",
-          "lint:style_fix": "stylelint src/**/*.{css,less,scss,sass} --fix",` : ''}`
+          "lint:style_fix": "stylelint src/**/*.{css,less,scss,sass} --fix" --allow-empty-input,` : ''}`
       : ''
     }
     ${
