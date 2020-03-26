@@ -134,10 +134,10 @@
   resolved "https://registry.yarnpkg.com/@istanbuljs/schema/-/schema-0.1.2.tgz#26520bf09abe4a5644cd5414e37125a8954241dd"
   integrity sha512-tsAQNx32a8CoFhjhijUIhI4kccIAgmGhy8LZMZgGfmXcpMbPRUqn5LWmgRttILi6yeGmBJd2xsPkFMs0PzgPCw==
 
-"@omni-door/tpl-utils@^0.0.20":
-  version "0.0.20"
-  resolved "https://registry.npmjs.org/@omni-door/tpl-utils/-/tpl-utils-0.0.20.tgz#d89581ffd3f8c4cc8679a240c9d18e676493c6f9"
-  integrity sha512-8Ts4QkiDL1+pGUhOY69duh+xcgnFaA3QY7Ys6CCGgQOKVpFfaOlC3AqSE9LBG2n+PIQXQ52igLcb4rEFtYGEDQ==
+"@omni-door/tpl-utils@^0.0.21":
+  version "0.0.21"
+  resolved "https://registry.npmjs.org/@omni-door/tpl-utils/-/tpl-utils-0.0.21.tgz#a51a628463aa26c7ceb7f24b6a7d35e0f6ff1969"
+  integrity sha512-YJ49sVl8l6uHoJ7ryRQNSS7ksxicGPMlSOktD6xdHot6korIYTW3a3MN5E6NSU6oQhOzCRs3x9eaMmujlrM66A==
   dependencies:
     "@types/signale" "^1.2.1"
     chalk "^3.0.0"
