@@ -6,11 +6,12 @@ export default (config: {
   ts: boolean;
   test: boolean;
   eslint: boolean;
+  prettier: boolean;
   commitlint: boolean;
   style: STYLE;
   stylelint: boolean;
 }) => {
-  const { project_type, ts, test, eslint, commitlint, style, stylelint } = config;
+  const { project_type, ts, test, eslint, prettier, commitlint, style, stylelint } = config;
 
   return `'use strict';
 
@@ -62,8 +63,9 @@ module.exports = {
     preflight: {
       typescript: ${!!ts}, // 构建时是否处理ts或tsx文件 (whether or not process the ts or tsx files)
       test: ${!!test}, // 构建时是否进行单元测试 (whether or not process unit-test)
-      eslint: ${!!eslint}, // 构建时是否进行eslint检测 (whether or not process eslint fix and check)
-      stylelint: ${!!stylelint}, // 构建时是否进行stylelint检测 (whether or not process style lint check)
+      eslint: ${!!eslint}, // 构建时是否进行eslint检测 (whether or not process eslint checking)
+      prettier: ${!!prettier}, // 构建时是否进行prettier检测 (whether or not process prettier checking)
+      stylelint: ${!!stylelint}, // 构建时是否进行stylelint检测 (whether or not process stylelint checking)
     }
   },
 
@@ -71,9 +73,10 @@ module.exports = {
     git: '', // 发布的git仓库地址 (project git repo url)
     preflight: {
       test: ${!!test}, // 发布前是否进行单元测试 (whether or not process unit-test)
-      eslint: ${!!eslint}, // 发布前是否进行eslint检测 (whether or not process eslint fix and check)
-      stylelint: ${!!stylelint}, // 发布前是否进行stylelint检测 (whether or not process style lint check)
-      commitlint: ${!!commitlint}, // 发布前是否进行commitlint检测 (whether or not process commit lint check)
+      eslint: ${!!eslint}, // 发布前是否进行eslint检测 (whether or not process eslint checking)
+      prettier: ${!!prettier}, // 发布前是否进行prettier检测 (whether or not process prettier checking)
+      stylelint: ${!!stylelint}, // 发布前是否进行stylelint检测 (whether or not process stylelint checking)
+      commitlint: ${!!commitlint}, // 发布前是否进行commitlint检测 (whether or not process commitlint checking)
       branch: 'master' // 发布前进行分支检测，设置为空字符串则不会检测 (only can release in this branch, set empty string to ignore this check)
     }
   },

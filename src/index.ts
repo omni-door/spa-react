@@ -163,7 +163,7 @@ async function init ({
   logTime('生成文件');
   const pathToFileContentMap = {
     // default files
-    [`${configFileName}`]: tpl.omni({ project_type, ts, test, eslint, commitlint, style, stylelint }),
+    [`${configFileName}`]: tpl.omni({ project_type, ts, test, eslint, prettier, commitlint, style, stylelint }),
     'package.json': tpl.pkj({ type_react: devDependencyMap['@types/react'], project_type, name, ts, test, eslint, prettier, commitlint, stylelint, strategy }),
     '.gitignore': tpl.gitignore(),
     [`src/index.${ts ? 'tsx' : 'jsx'}`]: tpl.source_index_react({ ts }),
