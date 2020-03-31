@@ -13,7 +13,7 @@ import {
   logTime,
   exec,
   output_file,
-} from '@omni-door/tpl-utils';
+} from '@omni-door/utils';
 import {
   babel,
   commitlint,
@@ -31,6 +31,8 @@ import {
   source_index_react,
   source_html,
   source_d,
+  source_index_style,
+  source_index_reset,
   webpack_config_common,
   webpack_config_dev,
   webpack_config_prod,
@@ -49,7 +51,7 @@ import {
 } from './templates';
 import { dependencies, devDependencies } from './configs/dependencies';
 import { devDependencies as devDependencyMap } from './configs/dependencies_stable_map';
-export { setBrand, setLogo } from '@omni-door/tpl-utils';
+export { setBrand, setLogo } from '@omni-door/utils';
 export { TPLS_INITIAL, TPLS_INITIAL_FN, TPLS_INITIAL_RETURE, TPLS_NEW, TPLS_NEW_FN, TPLS_NEW_RETURE } from './templates';
 
 const default_tpl_list = {
@@ -69,6 +71,8 @@ const default_tpl_list = {
   source_index_react,
   source_html,
   source_d,
+  source_index_style,
+  source_index_reset,
   webpack_config_common,
   webpack_config_dev,
   webpack_config_prod,
@@ -161,14 +165,17 @@ async function init ({
 
   // 生成项目文件
   logTime('生成文件');
+  const suffix_stylesheet = style && style === 'all' ? 'less' : style;
   const pathToFileContentMap = {
     // default files
     [`${configFileName}`]: tpl.omni({ project_type, ts, test, eslint, prettier, commitlint, style, stylelint }),
     'package.json': tpl.pkj({ type_react: devDependencyMap['@types/react'], project_type, name, ts, test, eslint, prettier, commitlint, stylelint, strategy }),
     '.gitignore': tpl.gitignore(),
-    [`src/index.${ts ? 'tsx' : 'jsx'}`]: tpl.source_index_react({ ts }),
+    [`src/index.${ts ? 'tsx' : 'jsx'}`]: tpl.source_index_react({ ts, style }),
     'src/index.html': tpl.source_html({ name }),
     'src/@types/global.d.ts': ts && tpl.source_d({ style }), // d.ts files
+    [`src/index.${suffix_stylesheet}`]: suffix_stylesheet && tpl.source_index_style(),
+    [`src/reset.${suffix_stylesheet}`]: suffix_stylesheet && tpl.source_index_reset(),
     // webpack config files
     'configs/webpack.config.common.js': tpl.webpack_config_common({ ts, style, configFileName }),
     'configs/webpack.config.dev.js': tpl.webpack_config_dev({ project_type, name, style, ts }),

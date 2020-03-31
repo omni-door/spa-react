@@ -1,4 +1,4 @@
-import { STYLE } from '@omni-door/tpl-utils';
+import { STYLE } from '@omni-door/utils';
 
 export default function (config: {
   style: STYLE;
@@ -29,24 +29,94 @@ module.exports = merge(commonConfig, {
     rules: [
       ${style ? (style === 'css' ? `{
         test: /\\.css$/,
-        use:  [MiniCssExtractPlugin.loader, 'css-loader']
+        oneOf: [
+          {
+            resourceQuery: /modules/,
+            use: [
+              MiniCssExtractPlugin.loader,
+              { loader: 'css-loader', options: { modules: true } }
+            ]
+          },
+          {
+            use: [MiniCssExtractPlugin.loader, 'css-loader']
+          }
+        ]
       },
       ` : style === 'less' ? `{
         test: /\\.(css|less)$/,
-        use: [MiniCssExtractPlugin.loader, 'css-loader', { loader: 'less-loader', options: { javascriptEnabled: true } }]
+        oneOf: [
+          {
+            resourceQuery: /modules/,
+            use: [
+              MiniCssExtractPlugin.loader,
+              { loader: 'css-loader', options: { modules: true } },
+              { loader: 'less-loader', options: { javascriptEnabled: true } }
+            ]
+          },
+          {
+            use: [MiniCssExtractPlugin.loader, 'css-loader', { loader: 'less-loader', options: { javascriptEnabled: true } }]
+          }
+        ]
       },` : style === 'scss' ? `{
         test: /\\.(css|scss|sass)$/,
-        use: [MiniCssExtractPlugin.loader, 'css-loader', 'sass-loader']
+        oneOf: [
+          {
+            resourceQuery: /modules/,
+            use: [
+              MiniCssExtractPlugin.loader,
+              { loader: 'css-loader', options: { modules: true } },
+              'sass-loader'
+            ]
+          },
+          {
+            use: [MiniCssExtractPlugin.loader, 'css-loader', 'sass-loader']
+          }
+        ]
       },` : `{
         test: /\\.css$/,
-        use:  [MiniCssExtractPlugin.loader, 'css-loader']
+        oneOf: [
+          {
+            resourceQuery: /modules/,
+            use: [
+              MiniCssExtractPlugin.loader,
+              { loader: 'css-loader', options: { modules: true } }
+            ]
+          },
+          {
+            use: [MiniCssExtractPlugin.loader, 'css-loader']
+          }
+        ]
       },{
         test: /\\.less$/,
-        use: [MiniCssExtractPlugin.loader, 'css-loader', { loader: 'less-loader', options: { javascriptEnabled: true } }]
+        oneOf: [
+          {
+            resourceQuery: /modules/,
+            use: [
+              MiniCssExtractPlugin.loader,
+              { loader: 'css-loader', options: { modules: true } },
+              { loader: 'less-loader', options: { javascriptEnabled: true } }
+            ]
+          },
+          {
+            use: [MiniCssExtractPlugin.loader, 'css-loader', { loader: 'less-loader', options: { javascriptEnabled: true } }]
+          }
+        ]
       },
       {
         test: /\.(scss|sass)$/,
-        use: [MiniCssExtractPlugin.loader, 'css-loader', 'sass-loader']
+        oneOf: [
+          {
+            resourceQuery: /modules/,
+            use: [
+              MiniCssExtractPlugin.loader,
+              { loader: 'css-loader', options: { modules: true } },
+              'sass-loader'
+            ]
+          },
+          {
+            use: [MiniCssExtractPlugin.loader, 'css-loader', 'sass-loader']
+          }
+        ]
       },`) : ''}
     ]
   },

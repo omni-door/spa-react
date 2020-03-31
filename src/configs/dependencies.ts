@@ -1,4 +1,4 @@
-import { getDependency, arr2str, STYLE, STRATEGY } from '@omni-door/tpl-utils';
+import { getDependency, arr2str, STYLE, STRATEGY } from '@omni-door/utils';
 import { dependencies as dependenciesMap, devDependencies as devDependenciesMap } from './dependencies_stable_map';
 
 interface Config {
@@ -54,6 +54,7 @@ export function devDependencies (strategy: STRATEGY, config: Config) {
     dependency('@babel/core'),
     dependency('@babel/preset-env'),
     dependency('@babel/preset-react'),
+    dependency('@umijs/babel-plugin-auto-css-modules'),
     ts ? dependency('@babel/preset-typescript') : ''
   ];
 

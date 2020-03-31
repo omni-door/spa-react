@@ -71,5 +71,6 @@ export const devDependencies = {
   'webpackbar': '4.0.0',
   'hard-source-webpack-plugin': '0.13.1',
   'fork-ts-checker-webpack-plugin': '4.0.5',
+  '@umijs/babel-plugin-auto-css-modules': '3.0.16',
   '@omni-door/cli': 'latest'
 };

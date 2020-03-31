@@ -1,4 +1,4 @@
-import { PROJECT_TYPE, STYLE } from '@omni-door/tpl-utils';
+import { PROJECT_TYPE, STYLE } from '@omni-door/utils';
 
 export default function (config: {
   project_type: PROJECT_TYPE;
@@ -37,26 +37,96 @@ module.exports = merge(commonConfig, {
     rules: [
       ${style ? (style === 'css' ? `{
         test: /\\.css$/,
-        use:  ['style-loader', 'css-loader']
+        oneOf: [
+          {
+            resourceQuery: /modules/,
+            use: [
+              'style-loader',
+              { loader: 'css-loader', options: { modules: true } }
+            ]
+          },
+          {
+            use: ['style-loader', 'css-loader']
+          }
+        ]
       }
       ` : style === 'less' ? `{
         test: /\\.(css|less)$/,
-        use: ['style-loader', 'css-loader', { loader: 'less-loader', options: { javascriptEnabled: true } }]
+        oneOf: [
+          {
+            resourceQuery: /modules/,
+            use: [
+              'style-loader',
+              { loader: 'css-loader', options: { modules: true } },
+              { loader: 'less-loader', options: { javascriptEnabled: true } }
+            ]
+          },
+          {
+            use: ['style-loader', 'css-loader', { loader: 'less-loader', options: { javascriptEnabled: true } }]
+          }
+        ]
       },` : style === 'scss' ? `{
         test: /\\.(css|scss|sass)$/,
-        use: ['style-loader', 'css-loader', 'sass-loader']
+        oneOf: [
+          {
+            resourceQuery: /modules/,
+            use: [
+              'style-loader',
+              { loader: 'css-loader', options: { modules: true } },
+              'sass-loader'
+            ]
+          },
+          {
+            use: ['style-loader', 'css-loader', 'sass-loader']
+          }
+        ]
       }` : `{
         test: /\\.css$/,
-        use:  ['style-loader', 'css-loader']
+        oneOf: [
+          {
+            resourceQuery: /modules/,
+            use: [
+              'style-loader',
+              { loader: 'css-loader', options: { modules: true } }
+            ]
+          },
+          {
+            use: ['style-loader', 'css-loader']
+          }
+        ]
       },{
         test: /\\.less$/,
-        use: ['style-loader', 'css-loader', { loader: 'less-loader', options: { javascriptEnabled: true } }]
+        oneOf: [
+          {
+            resourceQuery: /modules/,
+            use: [
+              'style-loader',
+              { loader: 'css-loader', options: { modules: true } },
+              { loader: 'less-loader', options: { javascriptEnabled: true } }
+            ]
+          },
+          {
+            use: ['style-loader', 'css-loader', { loader: 'less-loader', options: { javascriptEnabled: true } }]
+          }
+        ]
       },
       {
         test: /\.(scss|sass)$/,
-        use: ['style-loader', 'css-loader', 'sass-loader']
+        oneOf: [
+          {
+            resourceQuery: /modules/,
+            use: [
+              'style-loader',
+              { loader: 'css-loader', options: { modules: true } },
+              'sass-loader'
+            ]
+          },
+          {
+            use: ['style-loader', 'css-loader', 'sass-loader']
+          }
+        ]
       }`) : ''}
-    ],
+    ]
   },
   plugins: [
     new HtmlWebpackPlugin({

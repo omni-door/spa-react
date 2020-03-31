@@ -14,6 +14,8 @@ import stylelint from './stylelint';
 import source_index_react from './source/index_react';
 import source_html from './source/html';
 import source_d from './source/declaration';
+import source_index_style from './source/style';
+import source_index_reset from './source/reset';
 import webpack_config_common from './webpack/common';
 import webpack_config_dev from './webpack/dev';
 import webpack_config_prod from './webpack/prod';
@@ -40,6 +42,8 @@ export { default as stylelint } from './stylelint';
 export { default as source_index_react } from './source/index_react';
 export { default as source_html } from './source/html';
 export { default as source_d } from './source/declaration';
+export { default as source_index_style } from './source/style';
+export { default as source_index_reset } from './source/reset';
 export { default as webpack_config_common } from './webpack/common';
 export { default as webpack_config_dev } from './webpack/dev';
 export { default as webpack_config_prod } from './webpack/prod';
@@ -67,6 +71,8 @@ const tpls = {
   source_index_react,
   source_html,
   source_d,
+  source_index_style,
+  source_index_reset,
   webpack_config_common,
   webpack_config_dev,
   webpack_config_prod,
