@@ -13,7 +13,9 @@ module.exports = function (api) {
     '@babel/preset-typescript'` : ''}
   ];
 
-  const plugins = [];
+  const plugins = [
+    './node_modules/@umijs/babel-plugin-auto-css-modules'
+  ];
 
   return {
     presets,
