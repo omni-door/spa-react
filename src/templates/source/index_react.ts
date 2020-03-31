@@ -22,7 +22,7 @@ const App = () => (
       start your show
     </span>
     <footer className={${suffix ? "styles['main-footer']" : "'main-footer'"}}>
-      任意门团队 @omni-door
+      OMNI-DOOR TEAM @omni-door
     </footer>
   </div>
 );
