@@ -1,0 +1,1 @@
+import { generate_tpl } from '@omni-door/utils';
