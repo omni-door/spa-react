@@ -42,8 +42,8 @@ module.exports = merge(commonConfig, {
   plugins: [
     new HtmlWebpackPlugin({
       title: '\${project_name}',
-      path: path.resolve(__dirname, '../src'}),
-      template: path.join(__dirname, '../src/index.html'}),
+      path: path.resolve(__dirname, '../src'),
+      template: path.join(__dirname, '../src/index.html'),
       filename: 'index.html'
     }),
     new webpack.HotModuleReplacementPlugin(),
