@@ -2,7 +2,7 @@ import { tpl_engine_init } from '@omni-door/utils';
 
 const tpl = 
 `\`
-\${ts ? '///<reference types=\'webpack-env\' />' : ''}
+\${ts ? "///<reference types='webpack-env' />" : ''}
 import 'core-js/stable';
 import 'regenerator-runtime/runtime';
 import React from 'react';

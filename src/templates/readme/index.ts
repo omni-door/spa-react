@@ -6,57 +6,57 @@ const tpl =
 
 ## Run project
 
-\`\`\`shell
+\\\`\\\`\\\`shell
 npm start
-\`\`\`
+\\\`\\\`\\\`
 or
-\`\`\`shell
+\\\`\\\`\\\`shell
 npm run dev
-\`\`\`
+\\\`\\\`\\\`
 
 ## Create a Component
 
 ### Class Component
-\`\`\`shell
+\\\`\\\`\\\`shell
 npm run new [componentName]
-\`\`\`
+\\\`\\\`\\\`
 
 ### Functional Component
-\`\`\`shell
+\\\`\\\`\\\`shell
 npm run new [componentName] -- -f
-\`\`\`
+\\\`\\\`\\\`
 
 ## Build project
 
-\`\`\`shell
+\\\`\\\`\\\`shell
 npm run build
-\`\`\`
+\\\`\\\`\\\`
 
 ### Bypass all pre-check before building
-\`\`\`shell
+\\\`\\\`\\\`shell
 npm run build -- -n
-\`\`\`
+\\\`\\\`\\\`
 
 ## Release project
 
-\`\`\`shell
+\\\`\\\`\\\`shell
 npm run release
-\`\`\`
+\\\`\\\`\\\`
 
 ### Ignoring the automatic iteration version
-\`\`\`shell
+\\\`\\\`\\\`shell
 npm run release -- -i
-\`\`\`
+\\\`\\\`\\\`
 
 ### Manual iteration version
-\`\`\`shell
+\\\`\\\`\\\`shell
 npm run release -- -m 0.3.25
-\`\`\`
+\\\`\\\`\\\`
 
 ### Bypass all pre-check before release
-\`\`\`shell
+\\\`\\\`\\\`shell
 npm run release -- -n
-\`\`\`
+\\\`\\\`\\\`
 
 **More powerful customizations is in [\${configFileName}]**
 \``
