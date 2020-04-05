@@ -1,8 +1,7 @@
 import { tpl_engine_init } from '@omni-door/utils';
 
 const tpl = 
-`\`
-.main{
+`\`.main{
   position: relative;
   height: 100vh;
   padding-top: 40vh;

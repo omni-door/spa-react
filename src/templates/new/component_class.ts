@@ -1,8 +1,7 @@
 import { tpl_engine_new } from '@omni-door/utils';
 
 const tpl = 
-`\`
-import React, { PureComponent } from 'react';
+`\`import React, { PureComponent } from 'react';
 \${style ? \`import './style/\${componentName}.\${style === 'all' ? 'less' : style}';\` : ''}
 
 \${ts ? \`export interface \${componentName}Props {}

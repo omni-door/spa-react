@@ -2,8 +2,7 @@ import { tpl_engine_init } from '@omni-door/utils';
 import ts_jest from './ts_jest';
 
 const tpl = 
-`\`
-\${use_strict}
+`\`\${use_strict}
 
 module.exports = {
   clearMocks: true,

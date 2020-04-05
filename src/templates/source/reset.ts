@@ -1,8 +1,7 @@
 import { tpl_engine_init } from '@omni-door/utils';
 
 const tpl = 
-`\`
-html {
+`\`html {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   -ms-text-size-adjust: 100%;

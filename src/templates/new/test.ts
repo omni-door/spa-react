@@ -1,8 +1,7 @@
 import { tpl_engine_new } from '@omni-door/utils';
 
 const tpl = 
-`\`
-import * as React from 'react';
+`\`import * as React from 'react';
 import { configure, shallow, render, mount } from 'enzyme';
 import Adapter from 'enzyme-adapter-react-16';
 import \${componentName} from '../index';

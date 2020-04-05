@@ -10,8 +10,7 @@ import resolutions from './resolutions';
 
 
 const tpl = 
-`\`
-{
+`\`{
   "name": "\${project_name.toLowerCase()}",
   "version": "0.0.1",
   "description": "",

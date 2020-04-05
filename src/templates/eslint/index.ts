@@ -9,8 +9,7 @@ import rules_typescript_false from './rules_typescript_false';
 import rules_prettier from './rules_prettier';
 
 const tpl = 
-`\`
-\${use_strict}
+`\`\${use_strict}
 
 module.exports = {
   env: {

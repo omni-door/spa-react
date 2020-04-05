@@ -1,8 +1,7 @@
 import { tpl_engine_init } from '@omni-door/utils';
 
 const tpl = 
-`\`
-<!DOCTYPE html>
+`\`<!DOCTYPE html>
 <html lang="en">
   <head>
     <meta charset="UTF-8">

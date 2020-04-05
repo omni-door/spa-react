@@ -1,8 +1,7 @@
 import { tpl_engine_new } from '@omni-door/utils';
 
 const tpl = 
-`\`
-# \${componentName}
+`\`# \${componentName}
 
 ## Example
 

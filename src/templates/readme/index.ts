@@ -1,8 +1,7 @@
 import { tpl_engine_init } from '@omni-door/utils';
 
 const tpl = 
-`\`
-# \${project_name}
+`\`# \${project_name}
 
 ## Run project
 

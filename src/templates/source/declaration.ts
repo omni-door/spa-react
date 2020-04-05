@@ -1,8 +1,7 @@
 import { tpl_engine_init } from '@omni-door/utils';
 
 const tpl = 
-`\`
-declare module '*.css';
+`\`declare module '*.css';
 
 declare module '*.less';
 

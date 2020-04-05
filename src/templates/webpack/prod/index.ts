@@ -5,8 +5,7 @@ import rules_style_scss from './rules_style_scss';
 import rules_style_all from './rules_style_all';
 
 const tpl = 
-`\`
-\${use_strict}
+`\`\${use_strict}
 
 const path = require('path');
 const merge = require('webpack-merge');

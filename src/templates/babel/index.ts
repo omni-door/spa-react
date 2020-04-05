@@ -2,8 +2,7 @@ import { tpl_engine_init } from '@omni-door/utils';
 import preset_typescript from './preset_typescript';
 
 const tpl = 
-`\`
-\${use_strict}
+`\`\${use_strict}
 
 module.exports = function (api) {
   api.cache(false);

@@ -1,8 +1,7 @@
 import { tpl_engine_init } from '@omni-door/utils';
 
 const tpl = 
-`\`
-\${use_strict}
+`\`\${use_strict}
 
 module.exports = {
   tabWidth: 2,

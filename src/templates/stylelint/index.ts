@@ -3,8 +3,7 @@ import plugins_scss from './plugins_scss';
 import rules_scss from './rules_scss';
 
 const tpl = 
-`\`
-\${use_strict}
+`\`\${use_strict}
 
 module.exports = {
 	extends: [
