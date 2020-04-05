@@ -1,4 +1,5 @@
 const tpl = 
-`\`'plugin:prettier/recommended'\``;
+`\`,
+    'plugin:prettier/recommended'\``;
 
 export default tpl;

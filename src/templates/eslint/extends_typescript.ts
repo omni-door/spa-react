@@ -1,4 +1,5 @@
 const tpl = 
-`\`'plugin:@typescript-eslint/eslint-recommended',\``;
+`\`,
+    'plugin:@typescript-eslint/eslint-recommended'\``;
 
 export default tpl;

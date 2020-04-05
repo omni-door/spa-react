@@ -1,12 +1,10 @@
-export default function (config: {
-  name: string;
-  configFileName: string;
-}) {
-  const { name, configFileName } = config;
+import { tpl_engine_init } from '@omni-door/utils';
 
-  return `# ${name}
+const tpl = 
+`\`
+# \${project_name}
 
-## Run your project
+## Run project
 
 \`\`\`shell
 npm start
@@ -16,7 +14,7 @@ or
 npm run dev
 \`\`\`
 
-## Create a Component by the Template
+## Create a Component
 
 ### Class Component
 \`\`\`shell
@@ -28,39 +26,41 @@ npm run new [componentName]
 npm run new [componentName] -- -f
 \`\`\`
 
-## Build your project
+## Build project
 
 \`\`\`shell
 npm run build
 \`\`\`
 
-### Ignore pre-check
+### Bypass all pre-check before building
 \`\`\`shell
 npm run build -- -n
 \`\`\`
 
-## Release your project
+## Release project
 
 \`\`\`shell
 npm run release
 \`\`\`
 
-### Ignore automatic iteration of version
+### Ignoring the automatic iteration version
 \`\`\`shell
 npm run release -- -i
 \`\`\`
 
-### Manual iteration of version
+### Manual iteration version
 \`\`\`shell
 npm run release -- -m 0.3.25
 \`\`\`
 
-### Ignore pre-check
+### Bypass all pre-check before release
 \`\`\`shell
 npm run release -- -n
 \`\`\`
 
-**More powerful customizations is in [${configFileName}]**
-`;
-}
+**More powerful customizations is in [\${configFileName}]**
+\``
 
+export default tpl_engine_init({
+  tpl
+}, 'tpl');

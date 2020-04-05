@@ -1,5 +1,5 @@
 const tpl = 
-`\`
+`\`,
     'prettier/prettier': [
       'warn',
       {
@@ -13,7 +13,6 @@ const tpl =
         'arrowParens': 'avoid',
         'rangeEnd': 0
       }
-    ]
-\``;
+    ]\``;
 
 export default tpl;

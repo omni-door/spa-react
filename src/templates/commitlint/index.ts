@@ -1,4 +1,4 @@
-import { generate_tpl } from '@omni-door/utils';
+import { tpl_engine_init } from '@omni-door/utils';
 
 const tpl = 
 `\`
@@ -47,6 +47,6 @@ const Configuration = {
 module.exports = Configuration;
 \``
 
-export default generate_tpl({
+export default tpl_engine_init({
   tpl 
 }, 'tpl');

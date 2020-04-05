@@ -1,15 +1,16 @@
-export default function (config: {
-  componentName: string;
-  ts: boolean;
-}) {
-  const { componentName, ts } = config;
+import { tpl_engine_new } from '@omni-door/utils';
 
-  return `# ${componentName}
+const tpl = 
+`\`
+# \${componentName}
 
 ## Example
 
-\`\`\`${ts ? 'tsx' : 'jsx'}
-<${componentName} />
-\`\`\``;
-}
+\\\`\\\`\\\`\${ts ? 'tsx' : 'jsx'}
+<\${componentName} />
+\\\`\\\`\\\`
+\``
 
+export default tpl_engine_new({
+  tpl
+}, 'tpl');

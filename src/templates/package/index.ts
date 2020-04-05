@@ -1,4 +1,4 @@
-import { generate_tpl } from '@omni-door/utils';
+import { tpl_engine_init } from '@omni-door/utils';
 import script_test from './script_test';
 import script_commitlint from './script_commitlint';
 import script_lint from './script_lint';
@@ -32,7 +32,7 @@ const tpl =
   "keywords": [],
   "author": "",
   \${
-    (type_react && ts && \`\${alter_strategy('strategy', {
+    (type_react && ts && \`\${alter_strategy({
       stable: 'resolutions'
     })}\`) || ''
   }
@@ -40,7 +40,7 @@ const tpl =
 }
 \``
 
-export default (type_react: string) => generate_tpl({
+export default (type_react: string = '') => tpl_engine_init({
   tpl,
   script_test,
   script_commitlint,
@@ -53,17 +53,3 @@ export default (type_react: string) => generate_tpl({
 }, 'tpl', {
   type_react
 });
-
-
-// console.log(eng('@15.5.0')({
-//   ts: false,
-//   project_name: 'test123',
-//   project_type: 'toolkit',
-//   style: 'css',
-//   strategy: 'stable',
-//   test: true,
-//   eslint: true,
-//   prettier: false,
-//   commitlint: true,
-//   stylelint: true,
-// }));

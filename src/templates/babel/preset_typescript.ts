@@ -1,3 +1,5 @@
-const tpl = `"'@babel/preset-typescript'"`;
+const tpl = 
+`\`,
+    '@babel/preset-typescript'\``;
 
 export default tpl;

@@ -1,6 +1,8 @@
-export default function () {
+import { tpl_engine_init } from '@omni-door/utils';
 
-  return `.main{
+const tpl = 
+`\`
+.main{
   position: relative;
   height: 100vh;
   padding-top: 40vh;
@@ -25,5 +27,9 @@ export default function () {
   left: 50%;
   font-size: 16px;
   transform: translate(-50%, 0);
-}`;
 }
+\``
+
+export default tpl_engine_init({
+  tpl
+}, 'tpl');

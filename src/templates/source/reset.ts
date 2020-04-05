@@ -1,6 +1,8 @@
-export default function () {
+import { tpl_engine_init } from '@omni-door/utils';
 
-  return `html {
+const tpl = 
+`\`
+html {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   -ms-text-size-adjust: 100%;
@@ -123,5 +125,9 @@ input::-webkit-input-placeholder, textarea::-webkit-input-placeholder {
   -moz-perspective: 1000;
   -ms-perspective: 1000;
   perspective: 1000;
-}`;
 }
+\``
+
+export default tpl_engine_init({
+  tpl
+}, 'tpl');

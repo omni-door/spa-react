@@ -1,4 +1,4 @@
-import { generate_tpl } from '@omni-door/utils';
+import { tpl_engine_init } from '@omni-door/utils';
 import preset_typescript from './preset_typescript';
 
 const tpl = 
@@ -9,8 +9,7 @@ module.exports = function (api) {
   api.cache(false);
   const presets = [
     ['@babel/preset-env', { useBuiltIns: 'entry', corejs: 3 }],
-    '@babel/preset-react',
-    \${alter('ts', 'preset_typescript')}
+    '@babel/preset-react'\${alter('ts', 'preset_typescript')}
   ];
 
   const plugins = [
@@ -24,7 +23,7 @@ module.exports = function (api) {
 };
 \``
 
-export default generate_tpl({
+export default tpl_engine_init({
   tpl,
   preset_typescript
 }, 'tpl');

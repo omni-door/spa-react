@@ -1,4 +1,4 @@
-import { generate_tpl } from '@omni-door/utils';
+import { tpl_engine_init } from '@omni-door/utils';
 import extends_typescript from './extends_typescript';
 import extends_prettier from './extends_prettier';
 import parser_typescript from './parser_typescript';
@@ -18,15 +18,12 @@ module.exports = {
     'es6': true
   },
   extends: [
-    'eslint:recommended',
-    \${alter('ts', 'extends_typescript')}
-    \${alter('prettier', 'extends_prettier')}
-	],
+    'eslint:recommended'\${alter('ts', 'extends_typescript')}\${alter('prettier', 'extends_prettier')}
+  ],
   globals: {
     'Atomics': 'readonly',
     'SharedArrayBuffer': 'readonly'
-  },
-  \${alter('ts', 'parser_typescript')}
+  },\${alter('ts', 'parser_typescript')}
   parserOptions: {
     ecmaFeatures: {
       jsx: true
@@ -36,26 +33,22 @@ module.exports = {
     project: './tsconfig.json'
   },
   plugins: [
-    'react',
-    \${alter('ts', 'plugins_typescript')}
-    \${alter('prettier', 'plugins_prettier')}
+    'react'\${alter('ts', 'plugins_typescript')}\${alter('prettier', 'plugins_prettier')}
   ],
   rules: {
-    \${alter('ts', 'rules_typescript')}
-    \${alter('ts', 'rules_typescript_false', false)}
+    \${alter('ts', 'rules_typescript')}\${alter('ts', 'rules_typescript_false', false)}
     'no-console': ['error', { 'allow': ['warn', 'error', 'info'] }],
     'semi': ['error', 'always'],
     'prefer-spread': ['warn'],
     'no-unused-vars': ['off'],
     'no-extra-semi': ['warn'],
     'quotes': ['error', 'single'],
-    'linebreak-style': ['warn', 'unix'],
-    \${alter('prettier', 'rules_prettier')}
+    'linebreak-style': ['warn', 'unix']\${alter('prettier', 'rules_prettier')}
   }
 };
 \``
 
-export default generate_tpl({
+export default tpl_engine_init({
   tpl,
   extends_typescript,
   extends_prettier,

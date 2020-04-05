@@ -1,5 +1,8 @@
-export default function () {
-  return `'use strict';
+import { tpl_engine_init } from '@omni-door/utils';
+
+const tpl = 
+`\`
+\${use_strict}
 
 module.exports = {
   tabWidth: 2,
@@ -11,6 +14,9 @@ module.exports = {
   endOfLine: 'auto',
   arrowParens: 'avoid',
   rangeEnd: 0
-};`;
-}
+};
+\``
 
+export default tpl_engine_init({
+  tpl
+}, 'tpl');

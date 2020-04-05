@@ -1,4 +1,5 @@
 const tpl = 
-`\`'@typescript-eslint'\``;
+`\`,
+    '@typescript-eslint'\``;
 
 export default tpl;

@@ -109,7 +109,7 @@ export type InitOptions = {
 
 async function init ({
   strategy = 'stable',
-  projectName: name,
+  projectName: project_name,
   initPath,
   configFileName = 'omni.config.js',
   ts,
@@ -160,36 +160,37 @@ async function init ({
     logWarn('生成自定义模板出错，将全部使用默认模板进行初始化！(The custom template generating occured error, all will be initializated with the default template!)');
   }
   const tpl = { ...default_tpl_list, ...custom_tpl_list };
-  const project_type = 'spa-react';
+  const project_type = 'spa-react' as 'spa-react';
   logTime('模板解析', true);
 
   // 生成项目文件
   logTime('生成文件');
+  const params = { project_type, project_name, ts, test, eslint, prettier, commitlint, style, stylelint, strategy, configFileName }
   const suffix_stylesheet = style && style === 'all' ? 'less' : style;
   const pathToFileContentMap = {
     // default files
-    [`${configFileName}`]: tpl.omni({ project_type, ts, test, eslint, prettier, commitlint, style, stylelint }),
-    'package.json': tpl.pkj({ type_react: devDependencyMap['@types/react'], project_type, name, ts, test, eslint, prettier, commitlint, stylelint, strategy }),
-    '.gitignore': tpl.gitignore(),
-    [`src/index.${ts ? 'tsx' : 'jsx'}`]: tpl.source_index_react({ ts, style }),
-    'src/index.html': tpl.source_html({ name }),
-    'src/@types/global.d.ts': ts && tpl.source_d({ style }), // d.ts files
-    [`src/index.${suffix_stylesheet}`]: suffix_stylesheet && tpl.source_index_style(),
-    [`src/reset.${suffix_stylesheet}`]: suffix_stylesheet && tpl.source_index_reset(),
+    [`${configFileName}`]: tpl.omni(params),
+    'package.json': tpl.pkj(devDependencyMap['@types/react'])(params),
+    '.gitignore': tpl.gitignore(params),
+    [`src/index.${ts ? 'tsx' : 'jsx'}`]: tpl.source_index_react(params),
+    'src/index.html': tpl.source_html(params),
+    'src/@types/global.d.ts': ts && tpl.source_d(params), // d.ts files
+    [`src/index.${suffix_stylesheet}`]: suffix_stylesheet && tpl.source_index_style(params),
+    [`src/reset.${suffix_stylesheet}`]: suffix_stylesheet && tpl.source_index_reset(params),
     // webpack config files
-    'configs/webpack.config.common.js': tpl.webpack_config_common({ ts, style, configFileName }),
-    'configs/webpack.config.dev.js': tpl.webpack_config_dev({ project_type, name, style, ts }),
-    'configs/webpack.config.prod.js': tpl.webpack_config_prod({ style, configFileName }),
-    'tsconfig.json': ts && tpl.tsconfig(), // tsconfig
-    'jest.config.js': test && tpl.jest({ ts }), // test files
+    'configs/webpack.config.common.js': tpl.webpack_config_common(params),
+    'configs/webpack.config.dev.js': tpl.webpack_config_dev(params),
+    'configs/webpack.config.prod.js': tpl.webpack_config_prod(params),
+    'tsconfig.json': ts && tpl.tsconfig(params), // tsconfig
+    'jest.config.js': test && tpl.jest(params), // test files
     // lint files
-    '.eslintrc.js': eslint && tpl.eslint({ ts, prettier }),
-    '.eslintignore': eslint && tpl.eslintignore(),
-    'prettier.config.js': prettier && tpl.prettier(),
-    'stylelint.config.js': stylelint && tpl.stylelint({ style }),
-    'commitlint.config.js': commitlint && tpl.commitlint({ name }),
-    'babel.config.js': tpl.babel({ ts }), // build files
-    'README.md': tpl.readme({ name, configFileName }) // ReadMe
+    '.eslintrc.js': eslint && tpl.eslint(params),
+    '.eslintignore': eslint && tpl.eslintignore(params),
+    'prettier.config.js': prettier && tpl.prettier(params),
+    'stylelint.config.js': stylelint && tpl.stylelint(params),
+    'commitlint.config.js': commitlint && tpl.commitlint(params),
+    'babel.config.js': tpl.babel(params), // build files
+    'README.md': tpl.readme(params) // ReadMe
   }
   const file_path = (p: string) => path.resolve(initPath, p);
   for (const p in pathToFileContentMap) {
@@ -372,13 +373,20 @@ export function newTpl ({
     logWarn('生成自定义模板出错，将全部使用默认模板进行创建组件！(The custom template generating occured error, all will be initializated with the default template!)');
   }
   const tpl = { ...default_tpl_list, ...custom_tpl_list };
+  const params = {
+    ts,
+    test,
+    componentName,
+    style: stylesheet,
+    md
+  };
   // component tpl
-  const content_index = tpl.component_index({ ts, componentName });
-  const content_cc = type === 'cc' && tpl.component_class({ ts, componentName, style: stylesheet });
-  const content_fc = type === 'fc' && tpl.component_functional({ ts, componentName, style: stylesheet });
-  const content_readme = md === 'md' && tpl.component_readme({ componentName, ts });
-  const content_style = stylesheet && tpl.component_stylesheet({ componentName });
-  const content_test = test && tpl.component_test({ componentName });
+  const content_index = tpl.component_index(params);
+  const content_cc = type === 'cc' && tpl.component_class(params);
+  const content_fc = type === 'fc' && tpl.component_functional(params);
+  const content_readme = md === 'md' && tpl.component_readme(params);
+  const content_style = stylesheet && tpl.component_stylesheet(params);
+  const content_test = test && tpl.component_test(params);
 
   const pathToFileContentMap = {
     [`${componentName}.${ts ? 'tsx' : 'jsx'}`]: content_fc || content_cc,
