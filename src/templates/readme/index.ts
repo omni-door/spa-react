@@ -60,6 +60,8 @@ npm run release -- -n
 **More powerful customizations is in [\${configFileName}]**
 \``
 
-export default tpl_engine_init({
+export const tpl_readme = {
   tpl
-}, 'tpl');
+};
+
+export default tpl_engine_init(tpl_readme, 'tpl');

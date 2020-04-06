@@ -67,10 +67,12 @@ module.exports = merge(commonConfig, {
 });
 \``
 
-export default tpl_engine_init({
+export const tpl_webpack_dev = {
   tpl,
   rules_style_css,
   rules_style_less,
   rules_style_scss,
   rules_style_all
-}, 'tpl');
+};
+
+export default tpl_engine_init(tpl_webpack_dev, 'tpl');

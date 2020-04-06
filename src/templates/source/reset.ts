@@ -127,6 +127,8 @@ input::-webkit-input-placeholder, textarea::-webkit-input-placeholder {
 }
 \``
 
-export default tpl_engine_init({
+export const tpl_src_reset = {
   tpl
-}, 'tpl');
+};
+
+export default tpl_engine_init(tpl_src_reset, 'tpl');

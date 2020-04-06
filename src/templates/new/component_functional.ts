@@ -21,6 +21,8 @@ export const \${componentName}\${ts ? \`: FC<\${componentName}Props>\` : ''} = p
 export default memo(\${componentName});
 \``
 
-export default tpl_engine_new({
+export const tpl_new_functional = {
   tpl
-}, 'tpl');
+};
+
+export default tpl_engine_new(tpl_new_functional, 'tpl');

@@ -47,7 +47,7 @@ module.exports = {
 };
 \``
 
-export default tpl_engine_init({
+export const tpl_eslint = {
   tpl,
   extends_typescript,
   extends_prettier,
@@ -57,4 +57,6 @@ export default tpl_engine_init({
   rules_typescript,
   rules_typescript_false,
   rules_prettier
-}, 'tpl');
+};
+
+export default tpl_engine_init(tpl_eslint, 'tpl');

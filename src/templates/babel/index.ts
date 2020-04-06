@@ -22,7 +22,9 @@ module.exports = function (api) {
 };
 \``
 
-export default tpl_engine_init({
+export const tpl_babel = {
   tpl,
   preset_typescript
-}, 'tpl');
+};
+
+export default tpl_engine_init(tpl_babel, 'tpl');

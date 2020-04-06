@@ -42,17 +42,44 @@ import {
   component_readme,
   component_stylesheet,
   component_test,
-  TPLS_INITIAL,
+  TPLS_ORIGIN_INITIAL,
   TPLS_INITIAL_FN,
   TPLS_INITIAL_RETURE,
-  TPLS_NEW,
+  TPLS_ORIGIN_NEW,
   TPLS_NEW_FN,
-  TPLS_NEW_RETURE
+  TPLS_NEW_RETURE,
+  tpl_babel,
+  tpl_commitlint,
+  tpl_eslint,
+  tpl_ignore_eslint,
+  tpl_ignore_git,
+  tpl_jest,
+  tpl_ignore_npm,
+  tpl_omni,
+  tpl_package,
+  tpl_readme,
+  tpl_prettier,
+  tpl_stylelint,
+  tpl_tsconfig,
+  tpl_src_index,
+  tpl_src_html,
+  tpl_src_declaration,
+  tpl_src_style,
+  tpl_src_reset,
+  tpl_webpack_common,
+  tpl_webpack_dev,
+  tpl_webpack_prod,
+  tpl_new_class,
+  tpl_new_functional,
+  tpl_new_index,
+  tpl_new_readme,
+  tpl_new_stylesheet,
+  tpl_new_test
 } from './templates';
 import { dependencies, devDependencies } from './configs/dependencies';
 import { devDependencies as devDependencyMap } from './configs/dependencies_stable_map';
 export { setBrand, setLogo } from '@omni-door/utils';
-export { TPLS_INITIAL, TPLS_INITIAL_FN, TPLS_INITIAL_RETURE, TPLS_NEW, TPLS_NEW_FN, TPLS_NEW_RETURE } from './templates';
+export { TPLS_ORIGIN_INITIAL, TPLS_INITIAL_FN, TPLS_INITIAL_RETURE, TPLS_ORIGIN_NEW, TPLS_NEW_FN, TPLS_NEW_RETURE } from './templates';
 
 const default_tpl_list = {
   babel,
@@ -75,13 +102,31 @@ const default_tpl_list = {
   source_index_reset,
   webpack_config_common,
   webpack_config_dev,
-  webpack_config_prod,
-  component_class,
-  component_functional,
-  component_index,
-  component_readme,
-  component_stylesheet,
-  component_test
+  webpack_config_prod
+};
+
+const origin_tpl_list = {
+  tpl_babel,
+  tpl_commitlint,
+  tpl_eslint,
+  tpl_ignore_eslint,
+  tpl_ignore_git,
+  tpl_jest,
+  tpl_ignore_npm,
+  tpl_omni,
+  tpl_package,
+  tpl_readme,
+  tpl_prettier,
+  tpl_stylelint,
+  tpl_tsconfig,
+  tpl_src_index,
+  tpl_src_html,
+  tpl_src_declaration,
+  tpl_src_style,
+  tpl_src_reset,
+  tpl_webpack_common,
+  tpl_webpack_dev,
+  tpl_webpack_prod
 };
 
 export type ResultOfDependencies = string[] | { add?: string[]; remove?: string[]; };
@@ -100,7 +145,7 @@ export type InitOptions = {
   stylelint: boolean;
   pkgtool?: PKJTOOL;
   isSlient?: boolean;
-  tpls?: (tpls: TPLS_INITIAL) => TPLS_INITIAL_RETURE;
+  tpls?: (tpls: TPLS_ORIGIN_INITIAL) => TPLS_INITIAL_RETURE;
   dependencies?: (dependecies_default: string[]) => ResultOfDependencies;
   devDependencies?: (devDependecies_default: string[]) => ResultOfDependencies;
   error?: (err: any) => any;
@@ -135,7 +180,7 @@ async function init ({
   let custom_tpl_list = {};
   try {
     custom_tpl_list = typeof tpls === 'function'
-      ? tpls(default_tpl_list)
+      ? tpls(origin_tpl_list)
       : custom_tpl_list;
 
     for (const tpl_name in custom_tpl_list) {
@@ -324,6 +369,24 @@ async function init ({
   }, error, isSlient);
 }
 
+const default_tpl_new_list = {
+  component_class,
+  component_functional,
+  component_index,
+  component_readme,
+  component_stylesheet,
+  component_test
+};
+
+const origin_tpl_new_list = {
+  tpl_new_class,
+  tpl_new_functional,
+  tpl_new_index,
+  tpl_new_readme,
+  tpl_new_stylesheet,
+  tpl_new_test
+};
+
 export function newTpl ({
   ts,
   test,
@@ -341,19 +404,19 @@ export function newTpl ({
   newPath: string;
   md: MARKDOWN;
   type: 'fc' | 'cc';
-  tpls?: (tpls: TPLS_NEW) => TPLS_NEW_RETURE;
+  tpls?: (tpls: TPLS_ORIGIN_NEW) => TPLS_NEW_RETURE;
 }) {
   logTime('创建组件');
   logInfo(`开始创建 ${componentName} ${type === 'cc' ? '类' : '函数'}组件 (Start create ${componentName} ${type === 'cc' ? 'class' : 'functional'} component)`);
-  let custom_tpl_list = {};
+  let custom_tpl_new_list = {};
   try {
-    custom_tpl_list = typeof tpls === 'function'
-      ? tpls(default_tpl_list)
-      : custom_tpl_list;
+    custom_tpl_new_list = typeof tpls === 'function'
+      ? tpls(origin_tpl_new_list)
+      : custom_tpl_new_list;
 
-    for (const tpl_name in custom_tpl_list) {
+    for (const tpl_name in custom_tpl_new_list) {
       const name = tpl_name as keyof TPLS_NEW_RETURE;
-      const list = custom_tpl_list as TPLS_NEW_RETURE;
+      const list = custom_tpl_new_list as TPLS_NEW_RETURE;
       const tpl = list[name];
       const tplFactory = (config: any) => {
         try {
@@ -363,7 +426,7 @@ export function newTpl ({
           logWarn(`自定义模板 [${name}] 解析出错，将使用默认模板进行创建组件！(The custom template [${name}] parsing occured error, the default template will be used for initialization!)`);    
         }
 
-        return default_tpl_list[name](config);
+        return default_tpl_new_list[name](config);
       };
 
       (list[name] as TPLS_NEW_FN) = tplFactory as TPLS_NEW_FN;
@@ -372,7 +435,7 @@ export function newTpl ({
     logWarn(JSON.stringify(err_tpls));
     logWarn('生成自定义模板出错，将全部使用默认模板进行创建组件！(The custom template generating occured error, all will be initializated with the default template!)');
   }
-  const tpl = { ...default_tpl_list, ...custom_tpl_list };
+  const tpl = { ...default_tpl_new_list, ...custom_tpl_new_list };
   const params = {
     ts,
     test,

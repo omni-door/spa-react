@@ -40,6 +40,8 @@ package-lock.json
 *.log.*
 \``;
 
-export default tpl_engine_init({
+export const tpl_ignore_npm = {
   tpl 
-}, 'tpl');
+};
+
+export default tpl_engine_init(tpl_ignore_npm, 'tpl');

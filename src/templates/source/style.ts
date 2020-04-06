@@ -29,6 +29,8 @@ const tpl =
 }
 \``
 
-export default tpl_engine_init({
+export const tpl_src_style = {
   tpl
-}, 'tpl');
+};
+
+export default tpl_engine_init(tpl_src_style, 'tpl');

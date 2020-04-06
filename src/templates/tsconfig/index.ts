@@ -79,6 +79,8 @@ const tpl =
 }
 \``
 
-export default tpl_engine_init({
+export const tpl_tsconfig = {
   tpl
-}, 'tpl');
+};
+
+export default tpl_engine_init(tpl_tsconfig, 'tpl');

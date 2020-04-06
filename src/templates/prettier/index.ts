@@ -16,6 +16,8 @@ module.exports = {
 };
 \``
 
-export default tpl_engine_init({
+export const tpl_prettier = {
   tpl
-}, 'tpl');
+};
+
+export default tpl_engine_init(tpl_prettier, 'tpl');

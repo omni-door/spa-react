@@ -15,6 +15,8 @@ const tpl =
 </html>
 \``
 
-export default tpl_engine_init({
+export const tpl_src_html = {
   tpl
-}, 'tpl');
+};
+
+export default tpl_engine_init(tpl_src_html, 'tpl');

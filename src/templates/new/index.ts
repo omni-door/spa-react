@@ -7,6 +7,8 @@ export { \${componentName}\${ts ? \`, \${componentName}Props\` : ''} } from './\
 export default \${componentName};
 \``
 
-export default tpl_engine_new({
+export const tpl_new_index = {
   tpl
-}, 'tpl');
+};
+
+export default tpl_engine_new(tpl_new_index, 'tpl');

@@ -32,7 +32,9 @@ module.exports = {
 };
 \``
 
-export default tpl_engine_init({
+export const tpl_jest = {
   tpl,
   ts_jest
-}, 'tpl');
+};
+
+export default tpl_engine_init(tpl_jest, 'tpl');

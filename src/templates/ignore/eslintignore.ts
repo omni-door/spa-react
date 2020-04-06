@@ -21,6 +21,8 @@ doczrc.js
 *.conf.js
 \``;
 
-export default tpl_engine_init({
+export const tpl_ignore_eslint = {
   tpl 
-}, 'tpl');
+};
+
+export default tpl_engine_init(tpl_ignore_eslint, 'tpl');

@@ -46,6 +46,8 @@ const Configuration = {
 module.exports = Configuration;
 \``
 
-export default tpl_engine_init({
+export const tpl_commitlint = {
   tpl 
-}, 'tpl');
+};
+
+export default tpl_engine_init(tpl_commitlint, 'tpl');

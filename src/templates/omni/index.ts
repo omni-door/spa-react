@@ -83,6 +83,8 @@ module.exports = {
 };
 \``
 
-export default tpl_engine_init({
+export const tpl_omni = {
   tpl
-}, 'tpl');
+};
+
+export default tpl_engine_init(tpl_omni, 'tpl');

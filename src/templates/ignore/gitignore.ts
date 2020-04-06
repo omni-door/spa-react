@@ -19,6 +19,8 @@ package-lock.json
 *.log
 \``;
 
-export default tpl_engine_init({
+export const tpl_ignore_git = {
   tpl 
-}, 'tpl');
+};
+
+export default tpl_engine_init(tpl_ignore_git, 'tpl');

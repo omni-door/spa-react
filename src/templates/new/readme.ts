@@ -10,6 +10,8 @@ const tpl =
 \\\`\\\`\\\`
 \``
 
-export default tpl_engine_new({
+export const tpl_new_readme = {
   tpl
-}, 'tpl');
+};
+
+export default tpl_engine_new(tpl_new_readme, 'tpl');

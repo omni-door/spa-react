@@ -44,6 +44,8 @@ module.exports = {
 };
 \``
 
-export default tpl_engine_init({
+export const tpl_webpack_common = {
   tpl
-}, 'tpl');
+};
+
+export default tpl_engine_init(tpl_webpack_common, 'tpl');

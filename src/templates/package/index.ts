@@ -39,7 +39,7 @@ const tpl =
 }
 \``
 
-export default (type_react: string = '') => tpl_engine_init({
+export const tpl_package = {
   tpl,
   script_test,
   script_commitlint,
@@ -49,6 +49,6 @@ export default (type_react: string = '') => tpl_engine_init({
   script_lint_style,
   commitlint,
   resolutions
-}, 'tpl', {
-  type_react
-});
+};
+
+export default (type_react: string = '') => tpl_engine_init(tpl_package, 'tpl', { type_react });

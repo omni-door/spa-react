@@ -23,8 +23,10 @@ module.exports = {
 };
 \``
 
-export default tpl_engine_init({
+export const tpl_stylelint = {
   tpl,
   plugins_scss,
   rules_scss
-}, 'tpl');
+};
+
+export default tpl_engine_init(tpl_stylelint, 'tpl');

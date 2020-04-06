@@ -6,12 +6,12 @@ const tpl =
           {
             resourceQuery: /modules/,
             use: [
-              'style-loader',
+              MiniCssExtractPlugin.loader,
               { loader: 'css-loader', options: { modules: true } }
             ]
           },
           {
-            use: ['style-loader', 'css-loader']
+            use: [MiniCssExtractPlugin.loader, 'css-loader']
           }
         ]
       },
@@ -21,13 +21,13 @@ const tpl =
           {
             resourceQuery: /modules/,
             use: [
-              'style-loader',
+              MiniCssExtractPlugin.loader,
               { loader: 'css-loader', options: { modules: true } },
               { loader: 'less-loader', options: { javascriptEnabled: true } }
             ]
           },
           {
-            use: ['style-loader', 'css-loader', { loader: 'less-loader', options: { javascriptEnabled: true } }]
+            use: [MiniCssExtractPlugin.loader, 'css-loader', { loader: 'less-loader', options: { javascriptEnabled: true } }]
           }
         ]
       },
@@ -37,13 +37,13 @@ const tpl =
           {
             resourceQuery: /modules/,
             use: [
-              'style-loader',
+              MiniCssExtractPlugin.loader,
               { loader: 'css-loader', options: { modules: true } },
               'sass-loader'
             ]
           },
           {
-            use: ['style-loader', 'css-loader', 'sass-loader']
+            use: [MiniCssExtractPlugin.loader, 'css-loader', 'sass-loader']
           }
         ]
       }

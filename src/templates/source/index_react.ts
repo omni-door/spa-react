@@ -28,6 +28,8 @@ if (module.hot) {
 }
 \``
 
-export default tpl_engine_init({
+export const tpl_src_index = {
   tpl
-}, 'tpl');
+};
+
+export default tpl_engine_init(tpl_src_index, 'tpl');
