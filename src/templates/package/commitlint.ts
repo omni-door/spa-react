@@ -15,13 +15,13 @@ const tpl =
   }
 },
 "lint-staged": {
-  \${eslint ? \`"src/**/*.{js,jsx,ts,tsx}": [
-    "\${'npm run lint:es_fix'}"\${prettier ? \`,
-    "\${'npm run lint:prettier_fix'}"\` : ''}
-  ]\${eslint && stylelint ? ',' : ''}\` : ''}
-  \${stylelint ? \`"src/**/*.{css,scss,sass,less}": [
-    "\${'npm run lint:style_fix'}"\${prettier ? \`,
-    "\${'npm run lint:prettier_fix'}"\` : ''}
+  \${eslint || prettier ? \`"src/**/*.{js,jsx,ts,tsx}": [
+    \${eslint ? \`"\${script_eslint_fix}",\` : ''}
+    \${prettier ? \`"\${script_prettier_fix}"\` : ''}
+  ]\${stylelint || prettier ? ',' : ''}\` : ''}
+  \${stylelint || prettier ? \`"src/**/*.{css,scss,sass,less}": [
+    \${stylelint ? \`"\${script_stylelint_fix}",\` : ''}
+    \${prettier ? \`"\${script_prettier_fix}"\` : ''}
   ]\` : ''}
 },
 \``;

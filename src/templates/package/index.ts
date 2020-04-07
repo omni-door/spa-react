@@ -51,4 +51,12 @@ export const tpl_package = {
   resolutions
 };
 
-export default (type_react: string = '') => tpl_engine_init(tpl_package, 'tpl', { type_react });
+export default (type_react: string = '') => tpl_engine_init(tpl_package, 'tpl', {
+  type_react,
+  script_eslint: 'npm run lint:es',
+  script_stylelint: 'npm run lint:style',
+  script_prettier: 'npm run lint:prettier',
+  script_eslint_fix: 'npm run lint:es_fix',
+  script_stylelint_fix: 'npm run lint:style_fix',
+  script_prettier_fix: 'npm run lint:prettier_fix'
+});

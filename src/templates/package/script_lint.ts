@@ -1,7 +1,7 @@
 const tpl = 
 `\`
-    "lint": "\${prettier ? \`\${'npm run lint:prettier'}\${eslint || stylelint ? ' && ' : ''}\` : ''}\${eslint ? \`\${'npm run lint:es'}\${stylelint ? ' && npm run lint:style' : ''}\` : ''}",
-    "lint:fix": "\${prettier ? \`\${'npm run lint:prettier_fix'}\${eslint || stylelint ? ' && ' : ''}\` : ''}\${eslint ? \`\${'npm run lint:es_fix'}\${stylelint ? ' && npm run lint:style_fix' : ''}\` : ''}",
+    "lint": "\${prettier ? \`\${script_prettier}\${eslint || stylelint ? ' && ' : ''}\` : ''}\${eslint ? \`\${script_eslint}\${stylelint ? ' && ' : ''}\` : ''}\${stylelint ? \`\${script_stylelint}\` : ''}",
+    "lint:fix": "\${prettier ? \`\${script_prettier_fix}\${eslint || stylelint ? ' && ' : ''}\` : ''}\${eslint ? \`\${script_eslint_fix}\${stylelint ? ' && ' : ''}\` : ''}\${stylelint ? \`\${script_stylelint_fix}\` : ''}",
 \``;
 
 export default tpl;
