@@ -210,7 +210,7 @@ async function init ({
 
   // 生成项目文件
   logTime('生成文件');
-  const params = { project_type, project_name, ts, test, eslint, prettier, commitlint, style, stylelint, strategy, configFileName }
+  const params = { project_type, project_name, ts, test, eslint, prettier, commitlint, style, stylelint, strategy, configFileName };
   const suffix_stylesheet = style && style === 'all' ? 'less' : style;
   const pathToFileContentMap = {
     // default files
@@ -236,7 +236,7 @@ async function init ({
     'commitlint.config.js': commitlint && tpl.commitlint(params),
     'babel.config.js': tpl.babel(params), // build files
     'README.md': tpl.readme(params) // ReadMe
-  }
+  };
   const file_path = (p: string) => path.resolve(initPath, p);
   for (const p in pathToFileContentMap) {
     output_file({
@@ -461,7 +461,7 @@ export function newTpl ({
     }`]: content_test,
     [`index.${ts ? 'ts' : 'js'}`]: content_index,
     'README.md': content_readme
-  }
+  };
 
   /**
    * create files
