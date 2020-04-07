@@ -8,6 +8,7 @@ import tpl_gitignore from '../ignore/gitignore';
 import tpl_index from '../index';
 import tpl_jest from '../jest';
 import tpl_npmignore from '../ignore/npmignore';
+import tpl_prettierignore from '../ignore/prettierignore';
 import tpl_omni from '../omni';
 import tpl_package from '../package';
 import tpl_prettier from '../prettier';
@@ -60,6 +61,12 @@ describe('tpl_jest template test', function () {
 describe('tpl_npmignore template test', function () {
   it('type checking', function () {
     expect(tpl_npmignore).to.be.a('function');
+  });
+});
+
+describe('tpl_prettierignore template test', function () {
+  it('type checking', function () {
+    expect(tpl_prettierignore).to.be.a('function');
   });
 });
 
