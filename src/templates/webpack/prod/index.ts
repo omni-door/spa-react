@@ -108,7 +108,7 @@ module.exports = merge(commonConfig, {
   ],
   mode: 'production'
 });
-\``
+\``;
 
 export const tpl_webpack_prod = {
   tpl,

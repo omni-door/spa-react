@@ -125,7 +125,7 @@ input::-webkit-input-placeholder, textarea::-webkit-input-placeholder {
   -ms-perspective: 1000;
   perspective: 1000;
 }
-\``
+\``;
 
 export const tpl_src_reset = {
   tpl

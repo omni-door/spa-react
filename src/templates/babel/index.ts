@@ -20,7 +20,7 @@ module.exports = function (api) {
     plugins
   };
 };
-\``
+\``;
 
 export const tpl_babel = {
   tpl,

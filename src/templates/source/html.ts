@@ -13,7 +13,7 @@ const tpl =
     <div id='root'></div>
   </body>
 </html>
-\``
+\``;
 
 export const tpl_src_html = {
   tpl

@@ -37,7 +37,7 @@ const tpl =
   }
   "license": "ISC"
 }
-\``
+\``;
 
 export const tpl_package = {
   tpl,

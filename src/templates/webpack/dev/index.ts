@@ -65,7 +65,7 @@ module.exports = merge(commonConfig, {
     })
   ]
 });
-\``
+\``;
 
 export const tpl_webpack_dev = {
   tpl,

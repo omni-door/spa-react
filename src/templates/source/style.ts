@@ -27,7 +27,7 @@ const tpl =
   font-size: 16px;
   transform: translate(-50%, 0);
 }
-\``
+\``;
 
 export const tpl_src_style = {
   tpl
