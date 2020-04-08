@@ -8,7 +8,6 @@ import script_lint_style from './script_lint_style';
 import commitlint from './commitlint';
 import resolutions from './resolutions';
 
-
 const tpl = 
 `\`{
   "name": "\${project_name.toLowerCase()}",
