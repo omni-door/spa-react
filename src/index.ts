@@ -43,6 +43,7 @@ import {
   component_readme,
   component_stylesheet,
   component_test,
+  TPLS_INITIAL,
   TPLS_ORIGIN_INITIAL,
   TPLS_INITIAL_FN,
   TPLS_INITIAL_RETURE,
@@ -191,18 +192,25 @@ async function init ({
       const name = tpl_name as keyof TPLS_INITIAL_RETURE;
       const list = custom_tpl_list as TPLS_INITIAL_RETURE;
       const tpl = list[name];
-      const tplFactory = (config: any) => {
-        try {
-          return tpl && tpl(config);
-        } catch (err) {
-          logWarn(JSON.stringify(err));
-          logWarn(`自定义模板 [${name}] 解析出错，将使用默认模板进行初始化！(The custom template [${name}] parsing occured error, the default template will be used for initialization!)`);    
-        }
-
-        return default_tpl_list[name](config);
+      type OriginTpl = TPLS_INITIAL_RETURE[keyof TPLS_INITIAL_RETURE];
+      type BackupTpl = TPLS_INITIAL[keyof TPLS_INITIAL];
+      const tplFactory = (originTpl: OriginTpl, backupTpl: BackupTpl) => {
+        return function (config: any) {
+          const backupResult = backupTpl(config);
+          try {
+            const result = originTpl && originTpl(config);
+            if (typeof backupResult === 'function' && typeof result === 'function') {
+              return tplFactory(result, backupResult);
+            }
+            return result || backupResult;
+          } catch (err) {
+            logWarn(JSON.stringify(err));
+            logWarn(`自定义模板 [${name}] 解析出错，将使用默认模板进行初始化！(The custom template [${name}] parsing occured error, the default template will be used for initialization!)`);
+          }
+          return backupResult;
+        };
       };
-
-      (list[name] as TPLS_INITIAL_FN) = tplFactory as TPLS_INITIAL_FN;
+      (list[name] as TPLS_INITIAL_FN) = tplFactory(tpl, default_tpl_list[name]) as TPLS_INITIAL_FN;
     }
   } catch (err_tpls) {
     logWarn(JSON.stringify(err_tpls));
