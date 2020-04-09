@@ -56,7 +56,7 @@ export { default as component_readme, tpl_new_readme } from './new/readme';
 export { default as component_stylesheet, tpl_new_stylesheet } from './new/stylesheet';
 export { default as component_test, tpl_new_test } from './new/test';
 
-const tpls = {
+export const tpls = {
   babel,
   commitlint,
   eslint,

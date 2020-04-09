@@ -15,34 +15,6 @@ import {
   output_file,
 } from '@omni-door/utils';
 import {
-  babel,
-  commitlint,
-  eslint,
-  eslintignore,
-  gitignore,
-  jest,
-  npmignore,
-  prettierignore,
-  omni,
-  pkj,
-  prettier,
-  readme,
-  stylelint,
-  tsconfig,
-  source_index_react,
-  source_html,
-  source_d,
-  source_index_style,
-  source_index_reset,
-  webpack_config_common,
-  webpack_config_dev,
-  webpack_config_prod,
-  component_class,
-  component_functional,
-  component_index,
-  component_readme,
-  component_stylesheet,
-  component_test,
   TPLS_INITIAL,
   TPLS_ORIGIN_INITIAL,
   TPLS_INITIAL_FN,
@@ -50,89 +22,33 @@ import {
   TPLS_ORIGIN_NEW,
   TPLS_NEW_FN,
   TPLS_NEW_RETURE,
-  tpl_babel,
-  tpl_commitlint,
-  tpl_eslint,
-  tpl_ignore_eslint,
-  tpl_ignore_git,
-  tpl_jest,
-  tpl_ignore_npm,
-  tpl_ignore_prettier,
-  tpl_omni,
-  tpl_package,
-  tpl_readme,
-  tpl_prettier,
-  tpl_stylelint,
-  tpl_tsconfig,
-  tpl_src_index,
-  tpl_src_html,
-  tpl_src_declaration,
-  tpl_src_style,
-  tpl_src_reset,
-  tpl_webpack_common,
-  tpl_webpack_dev,
-  tpl_webpack_prod,
-  tpl_new_class,
-  tpl_new_functional,
-  tpl_new_index,
-  tpl_new_readme,
-  tpl_new_stylesheet,
-  tpl_new_test
+  tpls,
+  tpls_origin
 } from './templates';
 import { dependencies, devDependencies } from './configs/dependencies';
 import { devDependencies as devDependencyMap } from './configs/dependencies_stable_map';
 export { setBrand, setLogo } from '@omni-door/utils';
 export { TPLS_ORIGIN_INITIAL, TPLS_INITIAL_FN, TPLS_INITIAL_RETURE, TPLS_ORIGIN_NEW, TPLS_NEW_FN, TPLS_NEW_RETURE } from './templates';
 
-const default_tpl_list = {
-  babel,
-  commitlint,
-  eslint,
-  eslintignore,
-  gitignore,
-  jest,
-  npmignore,
-  prettierignore,
-  omni,
-  pkj,
-  prettier,
-  readme,
-  stylelint,
-  tsconfig,
-  source_index_react,
-  source_html,
-  source_d,
-  source_index_style,
-  source_index_reset,
-  webpack_config_common,
-  webpack_config_dev,
-  webpack_config_prod
-};
+const {
+  component_class,
+  component_functional,
+  component_index,
+  component_readme,
+  component_stylesheet,
+  component_test,
+  ...default_tpl_list
+} = tpls;
 
-const origin_tpl_list = {
-  tpl_babel,
-  tpl_commitlint,
-  tpl_eslint,
-  tpl_ignore_eslint,
-  tpl_ignore_git,
-  tpl_jest,
-  tpl_ignore_npm,
-  tpl_ignore_prettier,
-  tpl_omni,
-  tpl_package,
-  tpl_readme,
-  tpl_prettier,
-  tpl_stylelint,
-  tpl_tsconfig,
-  tpl_src_index,
-  tpl_src_html,
-  tpl_src_declaration,
-  tpl_src_style,
-  tpl_src_reset,
-  tpl_webpack_common,
-  tpl_webpack_dev,
-  tpl_webpack_prod
-};
+const {
+  tpl_new_class,
+  tpl_new_functional,
+  tpl_new_index,
+  tpl_new_readme,
+  tpl_new_stylesheet,
+  tpl_new_test,
+  ...origin_tpl_list
+} = tpls_origin;
 
 export type ResultOfDependencies = string[] | { add?: string[]; remove?: string[]; };
 
@@ -182,35 +98,38 @@ async function init ({
 }: InitOptions) {
   // 模板解析
   logTime('模板解析');
-  let custom_tpl_list = {};
+  let custom_tpl_list: ReturnType<Exclude<typeof tpls, undefined>> = {};
   try {
     custom_tpl_list = typeof tpls === 'function'
       ? tpls(origin_tpl_list)
       : custom_tpl_list;
 
     for (const tpl_name in custom_tpl_list) {
-      const name = tpl_name as keyof TPLS_INITIAL_RETURE;
-      const list = custom_tpl_list as TPLS_INITIAL_RETURE;
-      const tpl = list[name];
-      type OriginTpl = TPLS_INITIAL_RETURE[keyof TPLS_INITIAL_RETURE];
-      type BackupTpl = TPLS_INITIAL[keyof TPLS_INITIAL];
-      const tplFactory = (originTpl: OriginTpl, backupTpl: BackupTpl) => {
+      const name = tpl_name as keyof typeof custom_tpl_list;
+      const list = custom_tpl_list;
+      type CustomTpl = TPLS_INITIAL_RETURE[keyof TPLS_INITIAL_RETURE];
+      type OriginTpl = TPLS_INITIAL[keyof TPLS_INITIAL];
+      const tplFactory = (customTpl: CustomTpl, originTpl: OriginTpl) => {
         return function (config: any) {
-          const backupResult = backupTpl(config);
           try {
-            const result = originTpl && originTpl(config);
-            if (typeof backupResult === 'function' && typeof result === 'function' && typeof tplFactory === 'function') {
-              return tplFactory(result, backupResult);
+            const result = customTpl && customTpl(config);
+            if (typeof result === 'function') {
+              // call originTpl here is resolving the address reference bug
+              // because call the originTpl will affect the origin_tpl_list's tpl
+              const originResult = originTpl(config);
+              if (typeof originResult === 'function') {
+                return tplFactory(result, originResult);
+              }
             }
             return result;
           } catch (err) {
             logWarn(err);
             logWarn(`自定义模板 [${name}] 解析出错，将使用默认模板进行初始化！(The custom template [${name}] parsing occured error, the default template will be used for initialization!)`);
-            return backupResult;
+            return originTpl(config);
           }
         };
       };
-      (list[name] as TPLS_INITIAL_FN) = tplFactory(tpl, default_tpl_list[name]) as TPLS_INITIAL_FN;
+      (list[name] as TPLS_INITIAL_FN) = tplFactory(list[name], default_tpl_list[name]) as TPLS_INITIAL_FN;
     }
   } catch (err_tpls) {
     logWarn(err_tpls);
