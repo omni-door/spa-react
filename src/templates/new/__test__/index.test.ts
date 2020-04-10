@@ -1,7 +1,7 @@
 import { describe, it } from 'mocha';
 import { expect } from 'chai';
-import component_class from '../class_component';
-import component_function from '../functional_component';
+import component_class from '../component_class';
+import component_function from '../component_functional';
 import component_index from '../index';
 import component_readme from '../readme';
 import component_stylesheet from '../stylesheet';
