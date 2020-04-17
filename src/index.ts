@@ -334,7 +334,7 @@ export function newTpl ({
   componentName: string;
   stylesheet: STYLE;
   newPath: string;
-  md: MARKDOWN;
+  md?: MARKDOWN;
   type: 'fc' | 'cc';
   tpls?: (tpls: TPLS_ORIGIN_NEW) => TPLS_NEW_RETURE;
 }) {
@@ -375,11 +375,13 @@ export function newTpl ({
     style: stylesheet,
     md
   };
+  if (md === 'mdx') logInfo('暂不支持 mdx 文档格式，使用 md 代替！(Not support mdx format replace to md format!)');
+
   // component tpl
   const content_index = tpl.component_index(params);
   const content_cc = type === 'cc' && tpl.component_class(params);
   const content_fc = type === 'fc' && tpl.component_functional(params);
-  const content_readme = md === 'md' && tpl.component_readme(params);
+  const content_readme = md && tpl.component_readme(params);
   const content_style = stylesheet && tpl.component_stylesheet(params);
   const content_test = test && tpl.component_test(params);
 
