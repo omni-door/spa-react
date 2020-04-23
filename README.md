@@ -21,7 +21,7 @@ The React single-page-application project template
 | babel | babel.config.js |
 | commitlint | commitlint.config.js |
 | eslint | .eslintrc.js |
-| ignore | .eslintignore & .gitignore & .npmignore & prettierignore |
+| ignore | .eslintignore & .gitignore & .npmignore & .prettierignore |
 | jest | jest.config.js |
 | new | the standard templates for `omni new` command |
 | omni | omni.config.js |
