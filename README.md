@@ -31,4 +31,4 @@ The React single-page-application project template
 | source | the standard templates in `src` folder |
 | stylelint | stylelint.config.js |
 | tsconfig | tsconfig.json |
-| webpack | contain `common`、`dev`、`prod` webpack-config-file |
+| webpack | contain `common`, `dev`, `prod` webpack-config-file |
