@@ -21,10 +21,10 @@ The React single-page-application project template
 | babel | babel.config.js |
 | commitlint | commitlint.config.js |
 | eslint | .eslintrc.js |
-| hupu | hupu.config.js |
 | ignore | .eslintignore & .gitignore & .npmignore & prettierignore |
 | jest | jest.config.js |
 | new | the standard templates for `omni new` command |
+| omni | omni.config.js |
 | package | package.json |
 | prettier | prettier.config.js |
 | readme | README.md |
